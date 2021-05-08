@@ -8,7 +8,7 @@ function CardProfile(params) {
       <Avatar>
         <Image
           layout="fill"
-          src="/photos/profile-small.jpg"
+          src="/photos/profile.jpg"
           alt="Peterson Fonseca Simião"
         />
       </Avatar>
