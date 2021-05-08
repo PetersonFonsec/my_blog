@@ -7,6 +7,10 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "../styles/global";
 import { darkTheme, defaultTheme } from "../styles/theme";
 
+import Header from "../components/Layouts/Header/index";
+import Footer from "../components/Layouts/Footer/index";
+import ButtonToggleTheme from "../components/Buttons/ToggleTheme/index";
+
 function MyApp({ Component, pageProps }) {
   const [theme, setTheme] = useState(true);
 
@@ -14,7 +18,13 @@ function MyApp({ Component, pageProps }) {
     <>
       <ThemeProvider theme={theme ? darkTheme : defaultTheme}>
         <GlobalStyle />
+        <Header />
+        <ButtonToggleTheme
+          darkTheme={theme}
+          toggleTheme={() => setTheme(!theme)}
+        />
         <Component {...pageProps} />
+        <Footer />
       </ThemeProvider>
     </>
   );

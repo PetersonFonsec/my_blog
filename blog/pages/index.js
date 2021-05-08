@@ -1,6 +1,3 @@
-import Head from "next/head";
-import Image from "next/image";
-
 import SectionProfile from "../components/Layouts/Sections/Profile";
 import SectionSkills from "../components/Layouts/Sections/Skills";
 import SectionProjects from "../components/Layouts/Sections/Projects";

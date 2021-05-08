@@ -1,9 +1,6 @@
 import SwiperCore, { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import "swiper/swiper.min.css";
-import "swiper/components/pagination/pagination.min.css";
-
 import { CarouselWrapper } from "./style";
 import CardLite from "../../Cards/CardLite";
 

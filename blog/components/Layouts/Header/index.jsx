@@ -1,13 +1,7 @@
 import { useState } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
 
 import Menu from "../Menu/index";
 import { Header, Button, Nav } from "./style";
-
-import LogoMobile from "../../../assets/icons/logo-mobile.svg";
-import Logo from "../../../assets/icons/logo.svg";
-import MenuIcon from "../../../assets/icons/menu.svg";
-import CloseIcon from "../../../assets/icons/close.svg";
 
 const links = [
   {
@@ -39,29 +33,27 @@ const HeaderComponent = () => {
   return (
     <>
       <Header>
-        <Router>
-          <picture>
-            <source media="(min-width: 768px)" srcSet={Logo} />
-            <img src={LogoMobile} alt="Logo - Peterson Simião" />
-          </picture>
+        <picture>
+          <source media="(min-width: 768px)" srcSet="/icons/logo.svg" />
+          <img src="/icons/logo-mobile.svg" alt="Logo - Peterson Simião" />
+        </picture>
 
-          <Nav>
-            <ul>
-              {links.map(({ idSection, label }, i) => (
-                <li key={i} onClick={() => scroll(idSection)}>
-                  {label}
-                </li>
-              ))}
-            </ul>
-          </Nav>
+        <Nav>
+          <ul>
+            {links.map(({ idSection, label }, i) => (
+              <li key={i} onClick={() => scroll(idSection)}>
+                {label}
+              </li>
+            ))}
+          </ul>
+        </Nav>
 
-          <Button onClick={() => setShowMenu(!showMenu)}>
-            <img
-              src={showMenu ? CloseIcon : MenuIcon}
-              alt="Icone menu hamburger"
-            />
-          </Button>
-        </Router>
+        <Button onClick={() => setShowMenu(!showMenu)}>
+          <img
+            src={showMenu ? "/icons/close.svg" : "/icons/menu.svg"}
+            alt="Icone menu hamburger"
+          />
+        </Button>
       </Header>
       <Menu
         links={links}
