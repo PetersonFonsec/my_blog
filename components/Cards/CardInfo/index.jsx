@@ -1,9 +1,11 @@
-import { Card, Content, Title, Description, Date, Thumb } from "./style";
+import Image from "next/image";
+
+import { Card, Content, Title, Description, Date } from "./style";
 
 function CardInfo({ title, description, date, thumb }) {
   return (
     <Card>
-      <Thumb src={thumb} alt={title} />
+      <Image layout="fill" src={thumb} alt={title} />
       <Content>
         <Date>{date}</Date>
         <Title>{title}</Title>

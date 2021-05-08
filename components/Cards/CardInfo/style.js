@@ -6,6 +6,16 @@ export const Card = styled.article`
   overflow: hidden;
   position: relative;
   width: 100%;
+
+  img {
+    position: absolute;
+    width: 100%;
+    display: block;
+    height: 100%;
+    left: 0;
+    top: 0;
+    object-fit: cover;
+  }
 `;
 
 export const Content = styled.div`
@@ -64,16 +74,6 @@ export const Description = styled.p`
     font-size: 18px;
     line-height: 22px;
   }
-`;
-
-export const Thumb = styled.img`
-  position: absolute;
-  width: 100%;
-  display: block;
-  height: 100%;
-  left: 0;
-  top: 0;
-  object-fit: cover;
 `;
 
 export const Date = styled.time`
