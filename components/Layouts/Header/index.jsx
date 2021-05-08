@@ -35,7 +35,12 @@ const HeaderComponent = () => {
       <Header>
         <picture>
           <source media="(min-width: 768px)" srcSet="/icons/logo.svg" />
-          <img src="/icons/logo-mobile.svg" alt="Logo - Peterson Simião" />
+          <img
+            width="40"
+            height="26"
+            src="/icons/logo-mobile.svg"
+            alt="Logo - Peterson Simião"
+          />
         </picture>
 
         <Nav>
@@ -50,6 +55,8 @@ const HeaderComponent = () => {
 
         <Button onClick={() => setShowMenu(!showMenu)}>
           <img
+            width="20"
+            height="18"
             src={showMenu ? "/icons/close.svg" : "/icons/menu.svg"}
             alt="Icone menu hamburger"
           />

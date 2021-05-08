@@ -22,6 +22,7 @@ export const Header = styled.header`
     filter: ${({ theme }) => (theme.darkTheme ? "invert(1)" : "unset")};
 
     @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+      height: auto;
       width: 268px;
     }
 
