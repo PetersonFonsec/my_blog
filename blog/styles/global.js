@@ -58,4 +58,10 @@ export default createGlobalStyle`
     margin: 0;
     overflow: visible;
   }
+  
+  main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 `;

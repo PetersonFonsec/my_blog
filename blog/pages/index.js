@@ -1,13 +1,18 @@
 import SectionProfile from "../components/Layouts/Sections/Profile";
 import SectionSkills from "../components/Layouts/Sections/Skills";
 import SectionProjects from "../components/Layouts/Sections/Projects";
+import AsideComponent from "../components/Layouts/Aside";
 
-export default function Home() {
+function Home() {
   return (
-    <>
-      <SectionProfile />
-      <SectionSkills />
+    <main>
+      <AsideComponent>
+        <SectionProfile />
+        <SectionSkills />
+      </AsideComponent>
       <SectionProjects />
-    </>
+    </main>
   );
 }
+
+export default Home;
