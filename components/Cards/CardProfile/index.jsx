@@ -1,10 +1,17 @@
+import Image from "next/image";
 import Socials from "../../Socials";
-import { Avatar, Card, Description, DownloadButton } from "./style";
+import { Card, Description, DownloadButton, Avatar } from "./style";
 
 function CardProfile(params) {
   return (
     <Card>
-      <Avatar src="/photos/profile-small.jpg" alt="Peterson Fonseca Simião" />
+      <Avatar>
+        <Image
+          layout="fill"
+          src="/photos/profile-small.jpg"
+          alt="Peterson Fonseca Simião"
+        />
+      </Avatar>
 
       <Description>
         Peterson F. Simião

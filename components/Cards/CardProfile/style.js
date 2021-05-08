@@ -24,15 +24,12 @@ export const Card = styled.div`
   }
 `;
 
-export const Avatar = styled.img`
-  border-radius: 50%;
+export const Avatar = styled.div`
+  margin-bottom: 28px;
   display: block;
   height: 140px;
-  margin-bottom: 28px;
-  object-fit: cover;
+  position: relative;
   width: 140px;
-  object-fit: cover;
-  object-position: center top;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     height: 220px;
@@ -45,6 +42,12 @@ export const Avatar = styled.img`
     margin-bottom: 40px;
     margin-top: -64px;
     width: 210.29px;
+  }
+
+  img {
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
   }
 `;
 
