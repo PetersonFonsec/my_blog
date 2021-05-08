@@ -5,13 +5,13 @@ import { Card, Description, DownloadButton, Avatar } from "./style";
 function CardProfile(params) {
   return (
     <Card>
-      {/* <Avatar>
+      <Avatar>
         <Image
           layout="fill"
           src="/photos/profile.jpg"
           alt="Peterson Fonseca Simião"
         />
-      </Avatar> */}
+      </Avatar>
 
       <Description>
         Peterson F. Simião
