@@ -3,7 +3,7 @@ import { Card } from "./styled";
 function CardLite({ src, alt }) {
   return (
     <Card>
-      <img src={src} alt={alt} />
+      <img height="50px" width="50px" src={src} alt={alt} />
     </Card>
   );
 }

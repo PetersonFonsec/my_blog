@@ -9,7 +9,12 @@ function Socials() {
           target="_blank"
           rel="noreferrer"
         >
-          <img src="/icons/github.svg" alt="Link para o meu GitHub" />
+          <img
+            height="34px"
+            width="34px"
+            src="/icons/github.svg"
+            alt="Link para o meu GitHub"
+          />
         </a>
       </Item>
       <Item>
@@ -18,7 +23,12 @@ function Socials() {
           target="_blank"
           rel="noreferrer"
         >
-          <img src="/icons/linkedin.svg" alt="Link para o meu linkedin" />
+          <img
+            height="34px"
+            width="34px"
+            src="/icons/linkedin.svg"
+            alt="Link para o meu linkedin"
+          />
         </a>
       </Item>
       <Item>
@@ -27,7 +37,12 @@ function Socials() {
           target="_blank"
           rel="noreferrer"
         >
-          <img src="/icons/instagram.svg" alt="Link para o meu Instagran" />
+          <img
+            height="34px"
+            width="34px"
+            src="/icons/instagram.svg"
+            alt="Link para o meu Instagran"
+          />
         </a>
       </Item>
       <Item>
@@ -36,7 +51,12 @@ function Socials() {
           target="_blank"
           rel="noreferrer"
         >
-          <img src="/icons/whatsapp.svg" alt="Link para o meu Whatsapp" />
+          <img
+            height="34px"
+            width="34px"
+            src="/icons/whatsapp.svg"
+            alt="Link para o meu Whatsapp"
+          />
         </a>
       </Item>
     </List>
