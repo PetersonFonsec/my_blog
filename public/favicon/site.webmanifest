@@ -14,9 +14,15 @@
       "src": "/favicon/android-chrome-384x384.png",
       "sizes": "384x384",
       "type": "image/png"
+    },
+    {
+      "src": "/favicon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "theme_color": "#61D7A4",
   "background_color": "#4D4D4D",
-  "display": "standalone"
+  "display": "fullscreen"
 }
