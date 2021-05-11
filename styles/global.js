@@ -58,8 +58,15 @@ export default createGlobalStyle`
     margin: 0;
     overflow: visible;
   }
+
+  #__next {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
   
   main {
+    flex: 1;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

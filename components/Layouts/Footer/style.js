@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Footer = styled.footer`
-  background: ${({ theme }) => theme.background.secundary};
+  background: ${({ theme }) => theme.background.secondary};
 `;
 
 export const Wrapper = styled.div`
