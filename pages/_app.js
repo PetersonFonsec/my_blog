@@ -61,25 +61,26 @@ function MyApp({ Component, pageProps }) {
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://petersonsimiao.com.br/" />
           <meta property="og:title" content="Olá, meu nome é Peterson" />
+          <meta property="og:image" content="/share.png" />
           <meta
             property="og:description"
             content="Olá, meu nome é Peterson e sou um desenvolvedor front-end"
           />
-          {/* <meta property="og:image" content="/assets/images/share.png" /> */}
 
           {/* Twitter */}
           <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:image" content="/share.png" />
+          <meta property="twitter:title" content="Olá, meu nome é Peterson" />
           <meta
             property="twitter:url"
             content="https://petersonsimiao.com.br/"
           />
-          <meta property="twitter:title" content="Olá, meu nome é Peterson" />
           <meta
             property="twitter:description"
             content="Olá, meu nome é Peterson e sou um desenvolvedor front-end"
           />
 
-          {/* <meta property="twitter:image" content="/assets/images/share.png" /> */}
+          {/* fonts */}
           <link rel="canonical" href="https://petersonsimiao.com.br/" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
