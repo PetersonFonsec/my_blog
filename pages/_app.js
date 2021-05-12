@@ -62,6 +62,9 @@ function MyApp({ Component, pageProps }) {
           <meta property="og:url" content="https://petersonsimiao.com.br/" />
           <meta property="og:title" content="Olá, meu nome é Peterson" />
           <meta property="og:image" content="/share.png" />
+          <meta property="og:image:type" content="image/png" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="800" />
           <meta
             property="og:description"
             content="Olá, meu nome é Peterson e sou um desenvolvedor front-end"
