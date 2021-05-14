@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 
 import Menu from "../Menu/index";
 import { Header, Button, Nav } from "./style";
@@ -33,15 +34,19 @@ const HeaderComponent = () => {
   return (
     <>
       <Header>
-        <picture>
-          <source media="(min-width: 768px)" srcSet="/icons/logo.svg" />
-          <img
-            width="40"
-            height="26"
-            src="/icons/logo-mobile.svg"
-            alt="Logo - Peterson Simião"
-          />
-        </picture>
+        <Link href="/">
+          <a>
+            <picture>
+              <source media="(min-width: 768px)" srcSet="/icons/logo.svg" />
+              <img
+                width="40"
+                height="26"
+                src="/icons/logo-mobile.svg"
+                alt="Logo - Peterson Simião"
+              />
+            </picture>
+          </a>
+        </Link>
 
         <Nav>
           <ul>

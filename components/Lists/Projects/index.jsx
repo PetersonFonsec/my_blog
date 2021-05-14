@@ -1,5 +1,6 @@
+import Link from "next/link";
 import CardInfo from "../../Cards/CardInfo/index";
-import { List, Item } from "./style";
+import { List, Item, ButtonShowMore } from "./style";
 
 const Projects = [
   {
@@ -37,13 +38,19 @@ const Projects = [
 
 function ListProjects() {
   return (
-    <List>
-      {Projects.map((project, i) => (
-        <Item key={i}>
-          <CardInfo {...project} />
-        </Item>
-      ))}
-    </List>
+    <>
+      <List>
+        {Projects.map((project, i) => (
+          <Item key={i}>
+            <CardInfo {...project} />
+          </Item>
+        ))}
+      </List>
+
+      <Link href="/projetos">
+        <ButtonShowMore as="a">Ver Mais</ButtonShowMore>
+      </Link>
+    </>
   );
 }
 
