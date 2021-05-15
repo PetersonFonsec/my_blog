@@ -53,7 +53,7 @@ const projects = [
     description:
       "Perfeito para você que é apaixonado por Pets, através de sua geolocalização você encontra produtos e serviços pets próximos, e o melhor, todos com descontos!!",
     date: "21/06/1999",
-    thumb: "/projects/amazon-share.png",
+    thumb: "/projects/petintime-share.png",
   },
 ];
 
