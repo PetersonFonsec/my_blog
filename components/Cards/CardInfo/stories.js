@@ -3,6 +3,7 @@ import CardInfo from "./index.jsx";
 export default {
   component: CardInfo,
   title: "CardInfo",
+  decorators: [(story) => <div style={{ width: "300px" }}>{story()}</div>],
 };
 
 const Template = (args) => <CardInfo {...args} />;
