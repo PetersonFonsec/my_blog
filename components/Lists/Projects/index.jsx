@@ -1,6 +1,7 @@
 import Link from "next/link";
 import CardInfo from "../../Cards/CardInfo/index";
 import { List, Item, ButtonShowMore } from "./style";
+import { projects } from "./models";
 
 const Projects = [
   {
@@ -40,11 +41,15 @@ function ListProjects() {
   return (
     <>
       <List>
-        {Projects.map((project, i) => (
-          <Item key={i}>
-            <CardInfo {...project} />
-          </Item>
-        ))}
+        {projects.map((project, i) => {
+          if (i > 4) return;
+
+          return (
+            <Item key={i}>
+              <CardInfo {...project} />
+            </Item>
+          );
+        })}
       </List>
 
       <Link href="/projetos">

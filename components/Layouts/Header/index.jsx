@@ -2,22 +2,8 @@ import { useState } from "react";
 import Link from "next/link";
 
 import Menu from "../Menu/index";
+import { links } from "./models";
 import { Header, Button, Nav } from "./style";
-
-const links = [
-  {
-    idSection: "skills",
-    label: "Habilidades",
-  },
-  // {
-  //   idSection: "/experiencia",
-  //   label: "Experiência",
-  // },
-  {
-    idSection: "projects",
-    label: "Projetos",
-  },
-];
 
 const scrollToSection = (id) =>
   document
