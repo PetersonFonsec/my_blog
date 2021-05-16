@@ -1,64 +1,16 @@
 import { List, Item } from "./style";
+import { socials } from "./models";
 
 function Socials() {
   return (
     <List>
-      <Item invert>
-        <a
-          href="https://github.com/PetersonFonsec"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            height="34px"
-            width="34px"
-            src="/icons/github.svg"
-            alt="Link para o meu GitHub"
-          />
-        </a>
-      </Item>
-      <Item>
-        <a
-          href="https://www.linkedin.com/in/peterson-fonseca-759203174/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            height="34px"
-            width="34px"
-            src="/icons/linkedin.svg"
-            alt="Link para o meu linkedin"
-          />
-        </a>
-      </Item>
-      <Item>
-        <a
-          href="https://www.instagram.com/petersonf_simiao/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            height="34px"
-            width="34px"
-            src="/icons/instagram.svg"
-            alt="Link para o meu Instagran"
-          />
-        </a>
-      </Item>
-      <Item>
-        <a
-          href="https://api.whatsapp.com/send?phone=5511977288479"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            height="34px"
-            width="34px"
-            src="/icons/whatsapp.svg"
-            alt="Link para o meu Whatsapp"
-          />
-        </a>
-      </Item>
+      {socials.map(({ link, alt, src, invert }) => (
+        <Item invert={invert}>
+          <a href={link} target="_blank" rel="noreferrer">
+            <img height="34px" width="34px" src={src} alt={alt} />
+          </a>
+        </Item>
+      ))}
     </List>
   );
 }

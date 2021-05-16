@@ -1,7 +1,11 @@
 import * as nextImage from "next/image";
 
+import "swiper/swiper.min.css";
+import "swiper/components/pagination/pagination.min.css";
+
 import { ThemeProvider } from "styled-components";
 import { darkTheme } from "../styles/theme";
+
 import GlobalStyle from "../styles/global";
 
 export const decorators = [
