@@ -13,15 +13,14 @@ function getColor(color) {
 }
 
 export const BadgeComponent = styled.span`
-  padding: 4px;
+  align-items: center;
   background-color: ${({ color }) => getColor(color)};
+  border-radius: 8px;
+  color: #fff;
+  display: flex;
+  font-family: "Montserrat";
   font-size: 14px;
   font-weight: 500;
-  font-family: "Montserrat";
-  color: #fff;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
   justify-content: center;
   padding: 4px 8px;
 `;
