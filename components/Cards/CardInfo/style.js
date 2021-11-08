@@ -16,6 +16,13 @@ export const Card = styled.article`
     top: 0;
     object-fit: cover;
   }
+
+  .badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 1;
+  }
 `;
 
 export const Content = styled.div`
