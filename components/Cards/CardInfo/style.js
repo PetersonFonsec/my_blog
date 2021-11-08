@@ -82,22 +82,3 @@ export const Description = styled.p`
     line-height: 22px;
   }
 `;
-
-export const Date = styled.time`
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-  color: #ffffff;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 18px;
-    line-height: 22px;
-    margin-bottom: 8px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    margin-bottom: 12px;
-  }
-`;

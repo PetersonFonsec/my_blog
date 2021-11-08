@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Badge from "../../Badge";
 
-import { Card, Content, Title, Description, Date } from "./style";
+import { Card, Content, Title, Description } from "./style";
 
 function getColor(stack) {
   const stacks = {
@@ -14,7 +14,7 @@ function getColor(stack) {
   return stacks[stack];
 }
 
-function CardInfo({ title, description, date, thumb, stack }) {
+function CardInfo({ title, description, thumb, stack }) {
   return (
     <Card>
       <div className="badge">
@@ -22,7 +22,6 @@ function CardInfo({ title, description, date, thumb, stack }) {
       </div>
       <Image layout="fill" src={thumb} alt={title} />
       <Content>
-        <Date>{date}</Date>
         <Title>{title}</Title>
         <Description>{description}</Description>
       </Content>
