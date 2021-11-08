@@ -1,34 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![meu site pessoal](https://user-images.githubusercontent.com/41239234/140803230-e2f2e692-293b-4a12-9c27-c28f7c301ea5.png)
 
-## Getting Started
+# Meu Site Pessoal
 
-First, run the development server:
+Esse é o repositório do meu site pessoal aqui você vai encontrar o codico tando de html quanto de css e js, pode ser útil caso você queira usar como base para criar o seu 😉.
+
+Link do [Figma](https://www.figma.com/file/xJLmixRYCTDI9tcX4JRbkk/by-blog?node-id=318%3A4).
+
+## Tecnologias usadas
+
+- ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+- ![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
+- ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
+- ![StyledComponents](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+- ![StoryBook](https://img.shields.io/badge/storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)
+
+## Tecnologias usadas
+
+Para poder usar localmente o projeto primeiro instale as dependências usando o comando abaixo.
+
+```bash
+yarn install
+# ou
+npm install
+```
+
+Depois de instalado as dependências ultilize um dos comandos abaixo para levantar o site localmente.
 
 ```bash
 npm run dev
-# or
+# ou
 yarn dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
