@@ -14,7 +14,7 @@ Link do [Figma](https://www.figma.com/file/xJLmixRYCTDI9tcX4JRbkk/by-blog?node-i
 - ![StyledComponents](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 - ![StoryBook](https://img.shields.io/badge/storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)
 
-## Tecnologias usadas
+## Passo a passo para rodar localmente 
 
 Para poder usar localmente o projeto primeiro instale as dependências usando o comando abaixo.
 
