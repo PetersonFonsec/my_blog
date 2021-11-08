@@ -21,15 +21,7 @@ export const Title = styled(TitleProjects)`
 export const List = styled.ul`
   display: grid;
   grid-gap: 24px;
-  grid-template-columns: repeat(2, 1fr);
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 
   li {
     height: 354px;
