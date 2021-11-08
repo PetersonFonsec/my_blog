@@ -2,7 +2,7 @@ import Image from "next/image";
 import Socials from "../../Socials";
 import { Card, Description, DownloadButton, Avatar } from "./style";
 
-function CardProfile(params) {
+function CardProfile() {
   return (
     <Card>
       <Avatar>
