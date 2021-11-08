@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-export const Card = styled.article`
+export const Card = styled.a`
   border-radius: 14px;
+  display: block;
   height: 100%;
   overflow: hidden;
   position: relative;
@@ -15,6 +16,13 @@ export const Card = styled.article`
     left: 0;
     top: 0;
     object-fit: cover;
+  }
+
+  .badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 1;
   }
 `;
 
@@ -32,6 +40,7 @@ export const Content = styled.div`
   justify-content: flex-end;
   color: #fff;
   padding: 12px 6px;
+  width: 1005;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     padding: 24px 28px;
@@ -73,24 +82,5 @@ export const Description = styled.p`
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     font-size: 18px;
     line-height: 22px;
-  }
-`;
-
-export const Date = styled.time`
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-  color: #ffffff;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 18px;
-    line-height: 22px;
-    margin-bottom: 8px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    margin-bottom: 12px;
   }
 `;
