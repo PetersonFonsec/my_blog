@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-export const Card = styled.article`
+export const Card = styled.a`
   border-radius: 14px;
+  display: block;
   height: 100%;
   overflow: hidden;
   position: relative;
@@ -39,6 +40,7 @@ export const Content = styled.div`
   justify-content: flex-end;
   color: #fff;
   padding: 12px 6px;
+  width: 1005;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     padding: 24px 28px;

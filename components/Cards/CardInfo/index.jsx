@@ -14,9 +14,9 @@ function getColor(stack) {
   return stacks[stack];
 }
 
-function CardInfo({ title, description, thumb, stack }) {
+function CardInfo({ title, description, thumb, stack, link }) {
   return (
-    <Card>
+    <Card as="a" href={link}>
       <div className="badge">
         <Badge color={getColor(stack)}>{stack}</Badge>
       </div>
