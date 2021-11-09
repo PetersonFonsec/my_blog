@@ -1,12 +1,12 @@
 import Socials from "../../Socials/index";
 import { Wrapper, Footer } from "./style";
 
-function footer(params) {
+function footer({ contact }) {
   return (
     <Footer>
       <Wrapper>
-        <Socials />
-        <hr />© 2021 Peterson F. Simião. Todos os direitos reservados.
+        <Socials contact={contact} />
+        <hr /> © 2021 Peterson F. Simião. Todos os direitos reservados.
       </Wrapper>
     </Footer>
   );

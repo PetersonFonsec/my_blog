@@ -10,7 +10,7 @@ const scrollToSection = (id) =>
     .getElementById(id)
     .scrollIntoView({ block: "start", behavior: "smooth" });
 
-const HeaderComponent = () => {
+const HeaderComponent = ({ contact }) => {
   const [showMenu, setShowMenu] = useState(false);
   const scroll = (id) => {
     setShowMenu(false);
@@ -58,6 +58,7 @@ const HeaderComponent = () => {
         active={links[0].idSection}
         callback={scroll}
         show={showMenu}
+        contact={contact}
       />
     </>
   );

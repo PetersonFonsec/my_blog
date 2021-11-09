@@ -29,7 +29,7 @@ function CardProfile({ profile }) {
         Baixar CV
       </DownloadButton>
 
-      <Socials />
+      <Socials contact={profile?.contact} />
     </Card>
   );
 }
