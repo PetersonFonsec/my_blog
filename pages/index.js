@@ -25,7 +25,7 @@ function Home({ projects, profile }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const projects = await getProjects();
   const profile = await getProfile();
 
