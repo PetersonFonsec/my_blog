@@ -10,4 +10,7 @@ module.exports = withPWA({
     dest: "public",
     disable: !isProd,
   },
+  images: {
+    domains: ["images.prismic.io"],
+  },
 });

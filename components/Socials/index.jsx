@@ -1,13 +1,17 @@
 import { List, Item } from "./style";
-import { socials } from "./models";
 
-function Socials() {
+function Socials({ contact }) {
   return (
     <List>
-      {socials.map(({ link, alt, src, invert }, i) => (
-        <Item key={i} invert={invert}>
-          <a href={link} target="_blank" rel="noreferrer">
-            <img height="34px" width="34px" src={src} alt={alt} />
+      {contact?.map(({ link, icone_social, invert_color }, i) => (
+        <Item key={i} invert={invert_color}>
+          <a href={link?.url} target={link?.target} rel="noreferrer">
+            <img
+              height="34px"
+              width="34px"
+              src={icone_social?.url}
+              alt={icone_social?.alt}
+            />
           </a>
         </Item>
       ))}

@@ -1,13 +1,13 @@
 import CardProfile from "../../Cards/CardProfile/index";
 import { Aside, Wrapper, AsideContainer } from "./style";
 
-function AsideComponent({ children }) {
+function AsideComponent({ children, profile }) {
   return (
     <>
       <Wrapper>
         <Aside>
           <AsideContainer>
-            <CardProfile />
+            <CardProfile profile={profile} />
           </AsideContainer>
         </Aside>
 

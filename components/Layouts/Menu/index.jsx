@@ -2,7 +2,7 @@ import { Menu, List, Item } from "./styled";
 
 import Socials from "../../Socials/index";
 
-function MenuComponent({ links, active, show, callback }) {
+function MenuComponent({ links, active, show, callback, contact }) {
   return (
     <Menu show={show}>
       <List role="menu">
@@ -18,7 +18,7 @@ function MenuComponent({ links, active, show, callback }) {
             </Item>
           ))}
       </List>
-      <Socials />
+      <Socials contact={contact} />
     </Menu>
   );
 }

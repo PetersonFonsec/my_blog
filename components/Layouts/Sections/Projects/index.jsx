@@ -2,12 +2,12 @@ import ListProjects from "../../../Lists/Projects";
 
 import { Section, Wrapper, Title } from "./style";
 
-function SectionProjects() {
+function SectionProjects({ projects }) {
   return (
     <Section id="projects">
       <Wrapper>
         <Title>Meus Projetos</Title>
-        <ListProjects />
+        <ListProjects projects={projects} />
       </Wrapper>
     </Section>
   );
