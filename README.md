@@ -2,7 +2,7 @@
 
 # Meu Site Pessoal
 
-Esse é o repositório do meu site pessoal aqui você vai encontrar o codico tando de html quanto de css e js, pode ser útil caso você queira usar como base para criar o seu 😉.
+Esse é o repositório do meu site pessoal, aqui você vai encontrar o código html, css e js. Pode ser útil caso você queira usar como base para criar o seu 😉.
 
 Link do [Figma](https://www.figma.com/file/xJLmixRYCTDI9tcX4JRbkk/by-blog?node-id=318%3A4).
 
