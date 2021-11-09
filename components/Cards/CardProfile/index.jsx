@@ -2,26 +2,27 @@ import Image from "next/image";
 import Socials from "../../Socials";
 import { Card, Description, DownloadButton, Avatar } from "./style";
 
-function CardProfile() {
+function CardProfile({ profile }) {
   return (
     <Card>
       <Avatar>
         <Image
           layout="fill"
-          src="/photos/profile.jpg"
-          alt="Peterson Fonseca Simião"
+          src={profile.avatar?.url}
+          alt={profile.avatar?.alt}
         />
       </Avatar>
 
       <Description>
-        Peterson F. Simião
-        <br /> Front-end developer
+        {profile.name}
+        <br />
+        {profile.role}
       </Description>
 
       <DownloadButton
         as="a"
-        href="/Curriculo-Peterson.pdf"
-        download
+        target="_blank"
+        href={profile.cv?.url}
         primary
         block
       >

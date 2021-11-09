@@ -16,11 +16,11 @@ function getColor(stack) {
 
 function CardInfo({ title, description, thumb, stack, link }) {
   return (
-    <Card as="a" href={link}>
+    <Card as="a" href={link.url} target={link.target}>
       <div className="badge">
         <Badge color={getColor(stack)}>{stack}</Badge>
       </div>
-      <Image layout="fill" src={thumb} alt={title} />
+      <Image layout="fill" src={thumb.url} alt={thumb.alt} />
       <Content>
         <Title>{title}</Title>
         <Description>{description}</Description>
