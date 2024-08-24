@@ -10,6 +10,7 @@ import GlobalStyle from "../styles/global";
 import { darkTheme, defaultTheme } from "../styles/theme";
 
 import ButtonToggleTheme from "../components/Buttons/ToggleTheme/index";
+import GoogleAnalytics from "../components/GoogleAnalytics/GoogleAnalytics";
 
 function MyApp({ Component, pageProps }) {
   const [theme, setTheme] = useState(true);

@@ -17,6 +17,14 @@ function MenuComponent({ links, active, show, callback, contact }) {
               {label}
             </Item>
           ))}
+          <Item 
+              as="a" 
+              href="/blog"
+              target="blog"
+              role="menuitem"
+            >
+             blog
+            </Item>
       </List>
       <Socials contact={contact} />
     </Menu>

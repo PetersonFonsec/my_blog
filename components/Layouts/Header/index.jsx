@@ -5,7 +5,7 @@ import Menu from "../Menu/index";
 import { links } from "./models";
 import { Header, Button, Nav } from "./style";
 
-const scrollToSection = (id) =>
+const scrollToSection = (id) => id &&
   document
     .getElementById(id)
     .scrollIntoView({ block: "start", behavior: "smooth" });
@@ -41,6 +41,9 @@ const HeaderComponent = ({ contact }) => {
                 {label}
               </li>
             ))}
+            <li>
+              <a href="/blog">blog</a>
+            </li>
           </ul>
         </Nav>
 
