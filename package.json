@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "14.x"
+    "node": "20.x"
   },
   "scripts": {
     "dev": "next dev",
@@ -14,11 +14,12 @@
     "chromatic": "npx chromatic --project-token d9a3e5b5e45e"
   },
   "dependencies": {
-    "next": "10.2.0",
+    "eslint-config-next": "^15.0.0-rc.0",
+    "next": "^15.0.0-rc.0",
     "next-pwa": "^5.2.21",
     "prismic-javascript": "^3.0.2",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "react": "^19.0.0-rc-b57d2823-20240822",
+    "react-dom": "^19.0.0-rc-b57d2823-20240822",
     "styled-components": "^5.3.0",
     "swiper": "^6.5.9"
   },
@@ -27,7 +28,7 @@
     "@storybook/addon-actions": "^6.3.12",
     "@storybook/addon-essentials": "^6.3.12",
     "@storybook/addon-links": "^6.3.12",
-    "@storybook/react": "^6.3.12",
+    "@storybook/react": "^8.2.9",
     "babel-loader": "^8.2.2",
     "chromatic": "^5.8.0"
   }

@@ -13,4 +13,7 @@ module.exports = withPWA({
   images: {
     domains: ["images.prismic.io"],
   },
+  compiler:{
+    styledComponents: true
+  }
 });
