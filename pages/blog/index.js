@@ -3,8 +3,6 @@ import CardInfo from "../../components/Cards/CardInfo";
 import SimpleList from "../../components/Lists/Simple";
 import Footer from "../../components/Layouts/Footer/index";
 import { getBlog } from "../../services/blog";
-import { getProjects } from "../../services/project";
-import { getProfile } from "../../services/profile";
 import Header from "../../components/Layouts/Header/index";
 
 function Projects({ projects, profile }) {
@@ -21,25 +19,9 @@ function Projects({ projects, profile }) {
 
   return (
     <>
-      <Header contact={profile.contact} />
-      <main>
-        <BannerProjects>{getProjects(3)}</BannerProjects>
-        <SimpleList title="Meus projetos">{getProjects()}</SimpleList>
-      </main>
-      <Footer contact={profile.contact} />
+      <h1>ola mundo</h1>
     </>
   );
-}
-
-export async function getStaticProps() {
-  const blog = await getBlog();
-
-  return {
-    props: {
-      blogblog,
-      profile,
-    },
-  };
 }
 
 export default Projects;
