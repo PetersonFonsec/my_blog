@@ -21,8 +21,7 @@ const HeaderComponent = ({ contact }) => {
     <>
       <Header>
         <Link href="/">
-          <a>
-            <picture>
+          <picture>
               <source media="(min-width: 768px)" srcSet="/icons/logo.svg" />
               <img
                 width="40"
@@ -30,8 +29,7 @@ const HeaderComponent = ({ contact }) => {
                 src="/icons/logo-mobile.svg"
                 alt="Logo - Peterson Simião"
               />
-            </picture>
-          </a>
+          </picture>
         </Link>
 
         <Nav>

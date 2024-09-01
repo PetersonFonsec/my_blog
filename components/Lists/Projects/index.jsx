@@ -20,7 +20,7 @@ function ListProjects({ projects }) {
       <List>{getProjects(4)}</List>
 
       <Link href="/projetos">
-        <ButtonShowMore as="a">Ver Mais</ButtonShowMore>
+        <ButtonShowMore>Ver Mais</ButtonShowMore>
       </Link>
     </>
   );

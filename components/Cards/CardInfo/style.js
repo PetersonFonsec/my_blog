@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Card = styled.a`
+export const Card = styled.div`
   border-radius: 14px;
   display: block;
   height: 100%;
