@@ -1,4 +1,4 @@
-import * as nextImage from "next/image";
+import * as nextImage from "next/legacy/image";
 
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css";

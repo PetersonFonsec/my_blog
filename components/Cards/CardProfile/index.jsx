@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Socials from "../../Socials";
 import { Card, Description, DownloadButton, Avatar } from "./style";
 
