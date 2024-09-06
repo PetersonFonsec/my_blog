@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Socials from "../../Socials";
 import { Card, Description, DownloadButton, Avatar } from "./style";
 
@@ -6,11 +6,7 @@ function CardProfile({ profile }) {
   return (
     <Card>
       <Avatar>
-        <Image
-          layout="fill"
-          src={profile.avatar?.url}
-          alt={profile.avatar?.alt}
-        />
+        <Image src={profile.avatar?.url} alt={profile.avatar?.alt} fill sizes="100vw" />
       </Avatar>
 
       <Description>

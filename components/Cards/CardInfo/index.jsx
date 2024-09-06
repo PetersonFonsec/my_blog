@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Badge from "../../Badge";
 
 import { Card, Content, Title, Description } from "./style";
@@ -20,7 +20,7 @@ function CardInfo({ title, description, thumb, stack, link }) {
       <div className="badge">
         <Badge color={getColor(stack)}>{stack}</Badge>
       </div>
-      <Image layout="fill" src={thumb.url} alt={thumb.alt} />
+      <Image src={thumb.url} alt={thumb.alt} fill sizes="100vw" />
       <Content>
         <Title>{title}</Title>
         <Description>{description}</Description>
