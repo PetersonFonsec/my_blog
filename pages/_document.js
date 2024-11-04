@@ -1,5 +1,5 @@
 import Document from "next/document";
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 import { ServerStyleSheet } from "styled-components";
 
@@ -100,7 +100,7 @@ export default class MyDocument extends Document {
                     rel="stylesheet"
                   />
                 </Head>
-                <GoogleTagManager  gtmId="G-QW48GBV898" />
+                <GoogleAnalytics gtmId={process.env.ANALYTICS_PUBLIC_MEASUREMENT_ID} />
                 <App {...props} />
               </>
             ),
