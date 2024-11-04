@@ -42,6 +42,9 @@ const HeaderComponent = ({ contact }) => {
             <li>
               <a href="/blog">blog</a>
             </li>
+            <li>
+              <a href="/about">Sobre mim</a>
+            </li>
           </ul>
         </Nav>
 

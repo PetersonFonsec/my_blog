@@ -2,7 +2,6 @@ import Prismic from "prismic-javascript";
 import { client } from "./client";
 
 function formatBlog(blog) {
-  console.log(blog)
   const getText = (field) => field[0]?.text;
 
   return {
