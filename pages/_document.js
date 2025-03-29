@@ -25,7 +25,7 @@ export default class MyDocument extends Document {
                   <meta name="theme-color" content="#000000" />
                   <meta
                     name="description"
-                    content="Olá, meu nome é Peterson e sou um desenvolvedor front-end"
+                    content="Olá, meu nome é Peterson e sou um desenvolvedor full stack"
                   />
 
                   <title>Peterson - Front end</title>
@@ -73,7 +73,7 @@ export default class MyDocument extends Document {
                   <meta property="og:image:height" content="800" />
                   <meta
                     property="og:description"
-                    content="Olá, meu nome é Peterson e sou um desenvolvedor front-end"
+                    content="Olá, meu nome é Peterson e sou um desenvolvedor full stack"
                   />
 
                   {/* Twitter */}
@@ -89,7 +89,7 @@ export default class MyDocument extends Document {
                   />
                   <meta
                     property="twitter:description"
-                    content="Olá, meu nome é Peterson e sou um desenvolvedor front-end"
+                    content="Olá, meu nome é Peterson e sou um desenvolvedor full stack"
                   />
 
                   {/* fonts */}

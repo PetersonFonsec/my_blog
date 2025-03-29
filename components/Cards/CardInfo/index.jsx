@@ -11,19 +11,23 @@ function getColor(stack) {
     WordPress: "darkBlue",
   };
 
-  return stacks[stack];
+  return stacks[stack] || "";
 }
 
 function CardInfo({ title, description, thumb, stack, link }) {
   return (
     <Card as="a" href={link.url} target={link.target}>
-      <div className="badge">
-        <Badge color={getColor(stack)}>{stack}</Badge>
-      </div>
-      <Image src={thumb.url} alt={thumb.alt} fill sizes="100vw" />
+      {stack && (
+        <div className="badge">
+          <Badge color={getColor(stack)}>{stack}</Badge>
+        </div>
+      )}
+
+      {thumb && <Image src={thumb.url} alt={thumb.alt} fill sizes="100vw" />}
       <Content>
-        <Title>{title}</Title>
-        <Description>{description}</Description>
+        {title && <Title>{title}</Title>}
+
+        {description && <Description>{description}</Description>}
       </Content>
     </Card>
   );

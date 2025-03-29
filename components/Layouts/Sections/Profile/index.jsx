@@ -8,7 +8,7 @@ function SectionProfile() {
           Olá,
           <br />
           meu nome é <strong>Peterson F. Simião</strong>
-          Desenvolvedor Front-end
+          Desenvolvedor Full Stack
         </Title>
       </SectionWrapper>
     </Section>
