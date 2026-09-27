@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Seo from "../components/Seo";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { SiteFooter, SiteHeader } from "../components/SiteChrome";
@@ -78,7 +78,7 @@ export default function Home() {
 
   return (
     <>
-      <Head><title>Peterson Simião — Desenvolvedor full stack sênior</title><meta name="description" content="Desenvolvimento de software, estudos e projetos pessoais de Peterson Simião." /></Head>
+      <Seo title="Peterson Simião — Desenvolvedor full stack sênior" description="Desenvolvimento de software, estudos e projetos pessoais de Peterson Simião." />
       <SiteHeader />
       <div className="lab-strip">LABORATÓRIO PESSOAL / Explore, construa, compartilhe ↓</div>
       <main className="home-main" ref={mainRef}>

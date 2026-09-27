@@ -1,28 +1,24 @@
 {
-  "name": "Peterson F. Simião - portfolio",
+  "name": "Peterson Simião — Laboratório pessoal",
   "short_name": "Peterson",
-  "description": "Olá, meu nome é Peterson e sou um desenvolvedor front-end",
+  "description": "Software, estudos e projetos pessoais de Peterson Simião.",
   "start_url": "/",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/favicon/android-chrome-192x192.png",
+      "src": "/favicon/android-chrome-192x192.png?v=pixel-2",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "/favicon/android-chrome-384x384.png",
-      "sizes": "384x384",
-      "type": "image/png"
-    },
-    {
-      "src": "/favicon/android-chrome-512x512.png",
+      "src": "/favicon/android-chrome-512x512.png?v=pixel-2",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any"
     }
   ],
-  "theme_color": "#61D7A4",
-  "background_color": "#4D4D4D",
-  "display": "fullscreen"
+  "theme_color": "#0d181e",
+  "background_color": "#0d181e",
+  "display": "standalone"
 }
