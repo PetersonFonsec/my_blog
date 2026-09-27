@@ -5,6 +5,8 @@
 
 .about-hero h1 span{color:var(--lime)}.about-hero .actions{font:inherit}.about-hero .tags{font:inherit;gap:8px}.about-hero .resume-status{font-size:14px;margin-top:18px}.button:disabled{cursor:not-allowed;opacity:.5;filter:none}a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offset:5px}.about-layout section{scroll-margin-top:30px}
 
+/* Reveal only after measuring the platform, avoiding a flash at the origin. */
+.traveler{visibility:hidden}
 /* Cable follows the climbing hands in the same coordinate system as the traveler. */
 .traveler-rope{position:absolute;z-index:3;top:0;width:6px;transform:translateX(-50%);border-inline:1px solid #40351e;background:repeating-linear-gradient(135deg,#d6bc78 0 4px,#8b713e 4px 8px);box-shadow:1px 0 #071016;pointer-events:none}
 .traveler-rope[hidden]{display:none}

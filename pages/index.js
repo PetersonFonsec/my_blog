@@ -31,7 +31,8 @@ export default function Home() {
     const anchors = [...main.querySelectorAll(".scene-anchor")];
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
     let points = [];
-    let queued = false;
+    let animationFrame = null;
+    let disposed = false;
 
     const measure = () => {
       const root = main.getBoundingClientRect();
@@ -43,7 +44,6 @@ export default function Home() {
     };
 
     const update = () => {
-      queued = false;
       document.querySelectorAll(".parallax-section").forEach((section) => {
         const bounds = section.getBoundingClientRect();
         const offset = innerHeight / 2 - (bounds.top + bounds.height / 2);
@@ -71,6 +71,7 @@ export default function Home() {
         }
       }
       traveler.style.transform = `translate3d(${Math.round(x)}px,${Math.round(y)}px,0)`;
+      traveler.style.visibility = "visible";
       traveler.style.backgroundPosition = `${(frame * 100) / 3}% 0`;
       // The raised hands in sprite frame 2 meet at 61% x / 10% y.
       // Keep the cable behind the sprite, ending inside the hands.
@@ -79,12 +80,35 @@ export default function Home() {
       rope.hidden = frame !== 2;
     };
 
-    const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+    const schedule = () => {
+      if (animationFrame !== null) return;
+      animationFrame = requestAnimationFrame(() => {
+        animationFrame = null;
+        measure();
+      });
+    };
+    // Fonts and grid layout can settle after the first effect (notably in Safari).
+    // Keep the platform coordinates fresh, including after back/forward restoration.
+    const observer = new ResizeObserver(schedule);
+    observer.observe(main);
+    anchors.forEach((anchor) => observer.observe(anchor));
+    main.querySelectorAll(".parallax-section").forEach((section) => observer.observe(section));
+    observer.observe(traveler);
     addEventListener("scroll", schedule, { passive: true });
-    addEventListener("resize", measure);
-    reduced.addEventListener("change", measure);
-    measure();
-    return () => { removeEventListener("scroll", schedule); removeEventListener("resize", measure); reduced.removeEventListener("change", measure); };
+    addEventListener("resize", schedule);
+    addEventListener("pageshow", schedule);
+    reduced.addEventListener("change", schedule);
+    document.fonts.ready.then(() => { if (!disposed) schedule(); });
+    schedule();
+    return () => {
+      disposed = true;
+      observer.disconnect();
+      if (animationFrame !== null) cancelAnimationFrame(animationFrame);
+      removeEventListener("scroll", schedule);
+      removeEventListener("resize", schedule);
+      removeEventListener("pageshow", schedule);
+      reduced.removeEventListener("change", schedule);
+    };
   }, []);
 
   return (
