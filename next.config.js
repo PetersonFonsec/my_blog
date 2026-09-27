@@ -1,20 +1,14 @@
 
-const isProd = process.env.NODE_ENV === "production";
-
-const withPWA = require("next-pwa")({
-  dest: "public",
-  disable: !isProd
-});
-
-module.exports = withPWA({
-  i18n: {
-    locales: ["pt-br"],
-    defaultLocale: "pt-br",
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  async redirects() {
+    return [
+      { source: "/about", destination: "/#sobre", permanent: true },
+      { source: "/blog", destination: "/posts", permanent: true },
+      { source: "/projetos", destination: "/posts", permanent: true },
+    ];
   },
-  images: {
-    domains: ["images.prismic.io"],
-  },
-  compiler:{
-    styledComponents: true
-  }
-});
+};
+
+module.exports = nextConfig;

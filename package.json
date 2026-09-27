@@ -8,31 +8,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "storybook": "start-storybook -s ./public -p 6006",
-    "build-storybook": "build-storybook -s public",
-    "chromatic": "npx chromatic --project-token d9a3e5b5e45e",
-    "prepare": "husky"
+    "start": "next start"
   },
   "dependencies": {
-    "@next/third-parties": "^15.0.2",
-    "eslint-config-next": "^15.0.0-rc.0",
-    "next": "^15.0.0-rc.0",
-    "next-pwa": "^5.2.21",
-    "prismic-javascript": "^3.0.2",
-    "react": "^19.0.0-rc-b57d2823-20240822",
-    "react-dom": "^19.0.0-rc-b57d2823-20240822",
-    "styled-components": "^5.3.0",
-    "swiper": "^6.5.9"
+    "next": "16.3.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
   },
-  "devDependencies": {
-    "@babel/core": "^7.14.2",
-    "@storybook/addon-actions": "^6.3.12",
-    "@storybook/addon-essentials": "^6.3.12",
-    "@storybook/addon-links": "^6.3.12",
-    "@storybook/react": "^8.2.9",
-    "babel-loader": "^8.2.2",
-    "chromatic": "^5.8.0",
-    "husky": "^9.1.5"
-  }
+  "devDependencies": {}
 }
