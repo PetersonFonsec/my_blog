@@ -22,10 +22,12 @@ function PixelWorld({ index }) {
 export default function Home() {
   const mainRef = useRef(null);
   const travelerRef = useRef(null);
+  const ropeRef = useRef(null);
 
   useEffect(() => {
     const main = mainRef.current;
     const traveler = travelerRef.current;
+    const rope = ropeRef.current;
     const anchors = [...main.querySelectorAll(".scene-anchor")];
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
     let points = [];
@@ -47,7 +49,10 @@ export default function Home() {
         const offset = innerHeight / 2 - (bounds.top + bounds.height / 2);
         section.querySelectorAll(".parallax").forEach((layer) => { layer.style.transform = reduced.matches ? "none" : `translate3d(0, ${Math.round(offset * Number(layer.dataset.speed))}px, 0)`; });
       });
-      if (!points.length || reduced.matches) return;
+      if (!points.length || reduced.matches) {
+        rope.hidden = true;
+        return;
+      }
       const rootTop = main.getBoundingClientRect().top + scrollY;
       const focus = scrollY + innerHeight * 0.55 - rootTop;
       let { x, y } = points[0];
@@ -67,13 +72,19 @@ export default function Home() {
       }
       traveler.style.transform = `translate3d(${Math.round(x)}px,${Math.round(y)}px,0)`;
       traveler.style.backgroundPosition = `${(frame * 100) / 3}% 0`;
+      // The raised hands in sprite frame 2 meet at 61% x / 10% y.
+      // Keep the cable behind the sprite, ending inside the hands.
+      rope.style.left = `${Math.round(x) + traveler.offsetWidth * 0.61}px`;
+      rope.style.height = `${Math.max(0, Math.round(y) + traveler.offsetHeight * 0.1)}px`;
+      rope.hidden = frame !== 2;
     };
 
     const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
     addEventListener("scroll", schedule, { passive: true });
     addEventListener("resize", measure);
+    reduced.addEventListener("change", measure);
     measure();
-    return () => { removeEventListener("scroll", schedule); removeEventListener("resize", measure); };
+    return () => { removeEventListener("scroll", schedule); removeEventListener("resize", measure); reduced.removeEventListener("change", measure); };
   }, []);
 
   return (
@@ -96,6 +107,7 @@ export default function Home() {
             <div className="scene-anchor"><div className="station"><span>{section.icon}</span></div><small>0{index + 1} / {index === 0 ? "Toda jornada começa com uma ideia." : index === 1 ? "Uma nova perspectiva." : "Sempre há algo novo para aprender."}</small></div>
           </section>
         ))}
+        <div className="traveler-rope" ref={ropeRef} hidden aria-hidden="true" />
         <div className="traveler" ref={travelerRef} role="img" aria-label="Peterson em pixel art acompanhando a navegação" />
       </main>
       <section className="contact" id="contato"><span className="eyebrow">03 / CONTATO</span><h2>Vamos trocar uma ideia?</h2><p>Sobre software, um projeto ou a próxima oportunidade.</p><div className="actions"><a className="button primary" href="https://www.linkedin.com/in/peterson-fonseca-759203174/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a className="button" href="mailto:contato@petersonsimiao.com.br">E-mail ↗</a></div></section>

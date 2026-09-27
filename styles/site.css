@@ -4,3 +4,9 @@
 @media(max-width:820px){.site-header nav a:not(:last-child){display:none}.parallax-section{grid-template-columns:1fr;min-height:0;padding:65px 7% 130px}.pixel-world:after{background:linear-gradient(#0b171fee 0 46%,#0b171f33 86%)}.scene-anchor{height:290px}.traveler{width:180px;height:240px}.section-copy h1{font-size:46px}.section-copy h2{font-size:40px}.actions{flex-direction:column}.button{width:100%}.posts-hero{padding-bottom:335px}.terminal{left:7%;right:7%;bottom:55px;width:auto}.archive-head{display:block}.filters{margin-top:25px}.post-grid{grid-template-columns:1fr}.article-layout{grid-template-columns:1fr;gap:35px}.article-layout aside{position:static}.article-hero h1{font-size:48px}.site-footer{flex-direction:column}.contact{padding-top:70px;padding-bottom:70px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.parallax{transform:none!important}.traveler{display:none}.post-card{transition:none}}@media(prefers-reduced-motion:no-preference){.post-card{transition:transform .18s,border-color .18s}}
 
 .about-hero h1 span{color:var(--lime)}.about-hero .actions{font:inherit}.about-hero .tags{font:inherit;gap:8px}.about-hero .resume-status{font-size:14px;margin-top:18px}.button:disabled{cursor:not-allowed;opacity:.5;filter:none}a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offset:5px}.about-layout section{scroll-margin-top:30px}
+
+/* Cable follows the climbing hands in the same coordinate system as the traveler. */
+.traveler-rope{position:absolute;z-index:3;top:0;width:6px;transform:translateX(-50%);border-inline:1px solid #40351e;background:repeating-linear-gradient(135deg,#d6bc78 0 4px,#8b713e 4px 8px);box-shadow:1px 0 #071016;pointer-events:none}
+.traveler-rope[hidden]{display:none}
+@media(max-width:820px){.traveler-rope{width:5px}}
+@media(prefers-reduced-motion:reduce){.traveler-rope{display:none}}
