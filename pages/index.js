@@ -5,7 +5,7 @@ import { SiteFooter, SiteHeader } from "../components/SiteChrome";
 
 const sections = [
   { id: "home", label: "00 / INÍCIO", title: <>Construo software.<br />Exploro ideias.<br /><span>Compartilho o processo.</span></>, description: "Um espaço para o que estudo, o que desenvolvo e as decisões pelo caminho.", cta: ["Explorar meus estudos", "/posts"], icon: "</>" },
-  { id: "sobre", label: "01 / SOBRE MEU TRABALHO", title: <>Entender o todo.<br />Cuidar dos detalhes.</>, description: "Atuo como desenvolvedor full stack sênior no Santander, do planejamento e das discussões de arquitetura à implementação. Hoje, sou uma referência em frontend no meu time.", cta: ["Conhecer minha atuação", "#atuacao"], icon: "{ }" },
+  { id: "sobre", label: "01 / SOBRE MEU TRABALHO", title: <>Entender o todo.<br />Cuidar dos detalhes.</>, description: "Atuo como desenvolvedor full stack sênior no Santander, do planejamento e das discussões de arquitetura à implementação. Hoje, sou uma referência em frontend no meu time.", cta: ["Conhecer a minha atuação", "/sobre"], icon: "{ }" },
   { id: "estudos", label: "02 / DIÁRIO DE ESTUDOS", title: <>Da curiosidade<br />à prática.</>, description: "Fundamentos, experimentos e aprendizados construindo software. Primeiro a teoria; depois, um projeto para colocar as ideias à prova.", cta: ["Ver estudos e projetos", "/posts"], icon: "↗" },
 ];
 
@@ -92,7 +92,6 @@ export default function Home() {
               <p>{section.description}</p>
               {index === 1 && <div className="tags"><span>Frontend</span><span>Backend</span><span>Arquitetura</span></div>}
               <div className="actions"><Link className="button primary" href={section.cta[1]}>{section.cta[0]} ↗</Link>{index === 0 && <a className="button" href="#sobre">Conhecer meu trabalho ↓</a>}</div>
-              {index === 1 && <details className="work-details" id="atuacao"><summary>Detalhes da minha atuação</summary><p>Construo jornadas completas, participo de decisões de domínio e conecto arquitetura à implementação. Meu próximo passo é aprofundar cloud e inteligência artificial.</p></details>}
             </div>
             <div className="scene-anchor"><div className="station"><span>{section.icon}</span></div><small>0{index + 1} / {index === 0 ? "Toda jornada começa com uma ideia." : index === 1 ? "Uma nova perspectiva." : "Sempre há algo novo para aprender."}</small></div>
           </section>

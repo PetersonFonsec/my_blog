@@ -5,7 +5,7 @@ export function SiteHeader() {
     <header className="site-header">
       <Link className="brand" href="/">peterson<span>_</span></Link>
       <nav aria-label="Navegação principal">
-        <Link href="/#sobre">Sobre</Link>
+        <Link href="/sobre">Sobre</Link>
         <Link href="/posts">Publicações</Link>
         <Link href="/#contato">Contato</Link>
       </nav>
