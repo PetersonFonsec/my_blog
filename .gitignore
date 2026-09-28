@@ -34,3 +34,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# Prismic snapshot refreshed on each build
+/.generated/

@@ -12,3 +12,7 @@
 .traveler-rope[hidden]{display:none}
 @media(max-width:820px){.traveler-rope{width:5px}}
 @media(prefers-reduced-motion:reduce){.traveler-rope{display:none}}
+
+.cms-content img, .cms-content iframe { max-width: 100%; }
+.cms-content img { height: auto; }
+.cms-content pre { overflow-x: auto; }

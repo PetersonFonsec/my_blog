@@ -11,7 +11,7 @@ Portfólio e diário de estudos com estética inspirada em jogos de plataforma e
 
 ## Desenvolvimento local
 
-Requer Node.js 20.
+Requer Node.js 22.
 
 ```bash
 npm install
@@ -27,4 +27,44 @@ npm run build
 npm start
 ```
 
-O projeto não requer variáveis de ambiente. Cada push para a branch `main` gera uma nova publicação na Vercel configurada para este repositório.
+## Posts do Prismic no build
+
+Todo `next build` (incluindo `npm run build` no deploy) consulta o Prismic,
+baixa todos os documentos publicados do tipo `posts`, seguindo a paginação,
+e cria um snapshot local em `.generated/posts.json`. Esse arquivo é regenerado
+em cada build e não deve ser versionado.
+
+`getStaticPaths` e `getStaticProps` usam esse snapshot para gerar o HTML de
+`/posts` e de cada `/posts/[slug]`. Não há ISR, geração sob demanda ou consulta
+ao Prismic no navegador. Slugs ausentes no build retornam 404. Os filtros usam
+apenas os resumos já presentes na página; o conteúdo completo dos outros posts
+não é enviado na listagem. O prefetch dos links de artigos está desativado.
+O Next.js ainda carrega seus arquivos estáticos e dados de navegação quando
+necessário; imagens e embeds presentes nos posts podem fazer requisições próprias.
+
+O conteúdo usa os campos existentes `title`, `content`, `references` e as tags.
+O slug editorial (`slugs[0]`) é preferido ao UID, mantendo URLs legíveis.
+Tags `Projeto`/`Projetos` classificam projetos; os demais posts são estudos.
+Erros de API, títulos ausentes ou slugs duplicados interrompem o build.
+Não há fallback silencioso para os artigos de exemplo.
+
+O repositório padrão é `peterson-site`. Variáveis opcionais no ambiente de build:
+
+- `PRISMIC_REPOSITORY`: nome ou endpoint de outro repositório.
+- `PRISMIC_ACCESS_TOKEN`: token para um repositório privado (sem prefixo `NEXT_PUBLIC_`).
+
+Publicar, editar ou excluir um post no Prismic exige um novo build/deploy para
+atualizar o site. O webhook `Vercel — publicação do site` no Prismic aciona o Deploy Hook
+`Prismic — publicações` do projeto Vercel `my-blog`, branch `main`, quando um
+documento é publicado (incluindo atualizações) ou despublicado. Eventos de
+rascunhos, alterações de releases e criação/exclusão de tags não disparam builds.
+O gatilho se aplica aos documentos do repositório; o build importa apenas `posts`.
+A URL privada do hook fica somente nos painéis dos serviços e não no Git.
+
+Para verificar a integração, use o teste do webhook no Prismic e confira a nova
+implantação em Deployments na Vercel. O conteúdo entra no ar após o build concluir.
+O código precisa estar na branch `main` remota, pois o hook usa essa versão.
+Em desenvolvimento, o snapshot é atualizado ao iniciar `npm run dev`; reinicie
+o processo para buscar alterações do CMS.
+
+Cada push para a branch `main` gera uma nova publicação na Vercel configurada para este repositório.
