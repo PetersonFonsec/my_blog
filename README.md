@@ -27,6 +27,27 @@ npm run build
 npm start
 ```
 
+## Integração contínua
+
+Todo pull request para `main` roda o workflow `.github/workflows/ci.yml`:
+
+- **Lint:** `npm run lint` (ESLint com `eslint-config-next`, sem warnings).
+- **Build e smoke test:** `npm run build` e `npm run test:smoke`, que sobe o
+  `next start` e confere o status de `/`, `/sobre`, `/posts`, de cada post do
+  snapshot, das páginas 404 e dos redirects.
+
+O build do CI consulta o Prismic como a Vercel faz, então um conteúdo publicado
+com erro (título ausente, slug duplicado) também falha o PR. Para repositórios
+privados, cadastre o secret `PRISMIC_ACCESS_TOKEN` (e, se necessário, a variável
+`PRISMIC_REPOSITORY`) em Settings → Secrets and variables → Actions.
+
+Para rodar localmente:
+
+```bash
+npm run lint
+npm run build && npm run test:smoke
+```
+
 ## Posts do Prismic no build
 
 Todo `next build` (incluindo `npm run build` no deploy) consulta o Prismic,
