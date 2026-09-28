@@ -20,11 +20,13 @@ function PixelWorld({ index }) {
 }
 
 export default function Home() {
+  const chromeRef = useRef(null);
   const mainRef = useRef(null);
   const travelerRef = useRef(null);
   const ropeRef = useRef(null);
 
   useEffect(() => {
+    const chrome = chromeRef.current;
     const main = mainRef.current;
     const traveler = travelerRef.current;
     const rope = ropeRef.current;
@@ -40,6 +42,10 @@ export default function Home() {
     let disposed = false;
 
     const measureTarget = () => {
+      const chromeHeight = `${Math.round(chrome.getBoundingClientRect().height)}px`;
+      if (main.style.getPropertyValue("--home-chrome-height") !== chromeHeight) {
+        main.style.setProperty("--home-chrome-height", chromeHeight);
+      }
       const root = main.getBoundingClientRect();
       points = anchors.map((anchor) => {
         const rect = anchor.getBoundingClientRect();
@@ -125,6 +131,7 @@ export default function Home() {
     // Fonts and grid layout can settle after the first effect (notably in Safari).
     // Keep the platform coordinates fresh, including after back/forward restoration.
     const observer = new ResizeObserver(schedule);
+    observer.observe(chrome);
     observer.observe(main);
     anchors.forEach((anchor) => observer.observe(anchor));
     sectionElements.forEach((section) => observer.observe(section));
@@ -149,8 +156,10 @@ export default function Home() {
   return (
     <>
       <Seo title="Peterson Simião — Desenvolvedor full stack sênior" description="Desenvolvimento de software, estudos e projetos pessoais de Peterson Simião." />
-      <SiteHeader />
-      <div className="lab-strip">LABORATÓRIO PESSOAL / Explore, construa, compartilhe ↓</div>
+      <div className="home-chrome" ref={chromeRef}>
+        <SiteHeader />
+        <div className="lab-strip">LABORATÓRIO PESSOAL / Explore, construa, compartilhe ↓</div>
+      </div>
       <main className="home-main" ref={mainRef}>
         {sections.map((section, index) => (
           <section className="parallax-section" id={section.id} key={section.id}>
