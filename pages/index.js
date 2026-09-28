@@ -170,7 +170,7 @@ export default function Home() {
               {index === 0 ? <h1>{section.title}</h1> : <h2>{section.title}</h2>}
               <p>{section.description}</p>
               {index === 1 && <div className="tags"><span>Frontend</span><span>Backend</span><span>Arquitetura</span></div>}
-              <div className="actions"><Link className="button primary" href={section.cta[1]}>{section.cta[0]} ↗</Link>{index === 0 && <a className="button" href="#sobre">Conhecer meu trabalho ↓</a>}</div>
+              <div className="actions"><Link className="button primary" href={section.cta[1]} data-ga-event="cta_click" data-ga-label={section.cta[0]} data-ga-location={`home_${section.id}`}>{section.cta[0]} ↗</Link>{index === 0 && <a className="button" href="#sobre" data-ga-event="cta_click" data-ga-label="Conhecer meu trabalho" data-ga-location="home_home">Conhecer meu trabalho ↓</a>}</div>
             </div>
             <div className="scene-anchor"><div className="station"><span>{section.icon}</span></div><small>0{index + 1} / {index === 0 ? "Toda jornada começa com uma ideia." : index === 1 ? "Uma nova perspectiva." : "Sempre há algo novo para aprender."}</small></div>
           </section>
@@ -178,7 +178,7 @@ export default function Home() {
         <div className="traveler-rope" ref={ropeRef} hidden aria-hidden="true" />
         <div className="traveler" ref={travelerRef} role="img" aria-label="Peterson em pixel art acompanhando a navegação" />
       </main>
-      <section className="contact" id="contato"><span className="eyebrow">03 / CONTATO</span><h2>Vamos trocar uma ideia?</h2><p>Sobre software, um projeto ou a próxima oportunidade.</p><div className="actions"><a className="button primary" href="https://www.linkedin.com/in/peterson-fonseca-759203174/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a className="button" href="mailto:contato@petersonsimiao.com.br">E-mail ↗</a></div></section>
+      <section className="contact" id="contato"><span className="eyebrow">03 / CONTATO</span><h2>Vamos trocar uma ideia?</h2><p>Sobre software, um projeto ou a próxima oportunidade.</p><div className="actions"><a className="button primary" href="https://www.linkedin.com/in/peterson-fonseca-759203174/" target="_blank" rel="noreferrer" data-ga-event="cta_click" data-ga-label="LinkedIn" data-ga-location="contato">LinkedIn ↗</a><a className="button" href="mailto:contato@petersonsimiao.com.br" data-ga-event="cta_click" data-ga-label="E-mail" data-ga-location="contato">E-mail ↗</a></div></section>
       <SiteFooter />
     </>
   );

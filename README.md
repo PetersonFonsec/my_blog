@@ -68,3 +68,24 @@ Em desenvolvimento, o snapshot é atualizado ao iniciar `npm run dev`; reinicie
 o processo para buscar alterações do CMS.
 
 Cada push para a branch `main` gera uma nova publicação na Vercel configurada para este repositório.
+
+## Google Analytics
+
+Defina `ANALYTICS_PUBLIC_MEASUREMENT_ID` (ex.: `G-XXXXXXXXXX`) nas variáveis de
+ambiente da Vercel. Sem ela, o script do GA não é carregado (ex.: localmente).
+
+Page views, inclusive navegações no cliente, vêm da medição otimizada do GA4
+(opção "Mudanças de página com base em eventos do histórico do navegador",
+ativa por padrão). Cliques são enviados por um listener único em `_app.js`
+para qualquer elemento com `data-ga-event`; os demais atributos `data-ga-*`
+viram parâmetros do evento (`data-ga-content-id` → `content_id`).
+
+Eventos:
+
+- `select_content` — clique em um post (`content_type=post`, `content_id` = slug, `label`, `location`).
+- `cta_click` — botões de CTA e links do menu (`label`, `location`, `link_url`).
+- `filter_posts` — filtros da listagem de publicações (`label`).
+
+Para ver os parâmetros nos relatórios, registre `label`, `location` e
+`content_id` como dimensões personalizadas (escopo de evento) no GA4 e marque
+`select_content` e `cta_click` como eventos-chave.

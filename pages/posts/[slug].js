@@ -20,7 +20,7 @@ export default function ArticlePage({ article, nextArticle }) {
           <article>
             <div className="cms-content" dangerouslySetInnerHTML={{ __html: article.html }} />
             {article.reference && <p><a href={article.reference} target="_blank" rel="noreferrer">Referência ↗</a></p>}
-            {nextArticle && <Link prefetch={false} className="next-article" href={`/posts/${nextArticle.slug}`}><small>PRÓXIMA LEITURA →</small><strong>{nextArticle.title}</strong></Link>}
+            {nextArticle && <Link prefetch={false} className="next-article" href={`/posts/${nextArticle.slug}`} data-ga-event="select_content" data-ga-content-type="post" data-ga-content-id={nextArticle.slug} data-ga-label={nextArticle.title} data-ga-location="proxima_leitura"><small>PRÓXIMA LEITURA →</small><strong>{nextArticle.title}</strong></Link>}
             <Link prefetch={false} className="back-link" href="/posts">← Voltar para todas as publicações</Link>
           </article>
         </div>
