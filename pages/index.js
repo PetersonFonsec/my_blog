@@ -28,23 +28,24 @@ export default function Home() {
     const main = mainRef.current;
     const traveler = travelerRef.current;
     const rope = ropeRef.current;
-    const anchors = [...main.querySelectorAll(".scene-anchor")];
+    const sectionElements = [...main.querySelectorAll(".parallax-section")];
+    const anchors = sectionElements.map((section) => section.querySelector(".scene-anchor"));
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
     let points = [];
     let animationFrame = null;
+    let needsUpdate = true;
+    let lastFrameTime = 0;
+    let currentPosition = null;
+    let targetPosition = null;
     let disposed = false;
 
-    const measure = () => {
+    const measureTarget = () => {
       const root = main.getBoundingClientRect();
       points = anchors.map((anchor) => {
         const rect = anchor.getBoundingClientRect();
         return { x: rect.left - root.left + rect.width * 0.5 - traveler.offsetWidth / 2, y: rect.bottom - root.top - traveler.offsetHeight - 34 };
       });
-      update();
-    };
-
-    const update = () => {
-      document.querySelectorAll(".parallax-section").forEach((section) => {
+      sectionElements.forEach((section) => {
         const bounds = section.getBoundingClientRect();
         const offset = innerHeight / 2 - (bounds.top + bounds.height / 2);
         section.querySelectorAll(".parallax").forEach((layer) => { layer.style.transform = reduced.matches ? "none" : `translate3d(0, ${Math.round(offset * Number(layer.dataset.speed))}px, 0)`; });
@@ -70,29 +71,63 @@ export default function Home() {
           frame = progress < 0.15 ? (index === 0 ? 0 : 1) : progress > 0.9 ? (index === 0 ? 1 : 3) : 2;
         }
       }
-      traveler.style.transform = `translate3d(${Math.round(x)}px,${Math.round(y)}px,0)`;
+
+      // Once scroll snap settles a section at the top, finish the journey on
+      // that platform instead of leaving the traveler in the climbing frame.
+      const snappedIndex = sectionElements.findIndex((section) => Math.abs(section.getBoundingClientRect().top) <= innerHeight * 0.04);
+      if (snappedIndex !== -1) {
+        ({ x, y } = points[snappedIndex]);
+        frame = [0, 1, 3][snappedIndex];
+      }
+      targetPosition = { x, y, frame };
+      if (!currentPosition) currentPosition = { x, y };
       traveler.style.visibility = "visible";
-      traveler.style.backgroundPosition = `${(frame * 100) / 3}% 0`;
+    };
+
+    const animate = (time) => {
+      if (needsUpdate) {
+        needsUpdate = false;
+        measureTarget();
+      }
+      if (!targetPosition || !currentPosition) {
+        animationFrame = null;
+        return;
+      }
+      const elapsed = lastFrameTime ? Math.min(time - lastFrameTime, 64) : 16;
+      lastFrameTime = time;
+      const easing = 1 - Math.exp(-elapsed / 110);
+      currentPosition.x += (targetPosition.x - currentPosition.x) * easing;
+      currentPosition.y += (targetPosition.y - currentPosition.y) * easing;
+      const x = Math.round(currentPosition.x * 10) / 10;
+      const y = Math.round(currentPosition.y * 10) / 10;
+      traveler.style.transform = `translate3d(${x}px,${y}px,0)`;
+      traveler.style.backgroundPosition = `${(targetPosition.frame * 100) / 3}% 0`;
       // The raised hands in sprite frame 2 meet at 61% x / 10% y.
       // Keep the cable behind the sprite, ending inside the hands.
-      rope.style.left = `${Math.round(x) + traveler.offsetWidth * 0.61}px`;
-      rope.style.height = `${Math.max(0, Math.round(y) + traveler.offsetHeight * 0.1)}px`;
-      rope.hidden = frame !== 2;
+      rope.style.left = `${x + traveler.offsetWidth * 0.61}px`;
+      rope.style.height = `${Math.max(0, y + traveler.offsetHeight * 0.1)}px`;
+      rope.hidden = targetPosition.frame !== 2;
+
+      const settled = Math.abs(targetPosition.x - currentPosition.x) < 0.1 && Math.abs(targetPosition.y - currentPosition.y) < 0.1;
+      if (settled && !needsUpdate) {
+        currentPosition = { x: targetPosition.x, y: targetPosition.y };
+        animationFrame = null;
+        lastFrameTime = 0;
+        return;
+      }
+      animationFrame = requestAnimationFrame(animate);
     };
 
     const schedule = () => {
-      if (animationFrame !== null) return;
-      animationFrame = requestAnimationFrame(() => {
-        animationFrame = null;
-        measure();
-      });
+      needsUpdate = true;
+      if (animationFrame === null) animationFrame = requestAnimationFrame(animate);
     };
     // Fonts and grid layout can settle after the first effect (notably in Safari).
     // Keep the platform coordinates fresh, including after back/forward restoration.
     const observer = new ResizeObserver(schedule);
     observer.observe(main);
     anchors.forEach((anchor) => observer.observe(anchor));
-    main.querySelectorAll(".parallax-section").forEach((section) => observer.observe(section));
+    sectionElements.forEach((section) => observer.observe(section));
     observer.observe(traveler);
     addEventListener("scroll", schedule, { passive: true });
     addEventListener("resize", schedule);
