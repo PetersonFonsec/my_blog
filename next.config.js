@@ -2,6 +2,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Exposes the Vercel variable to the browser bundle at build time.
+  env: { ANALYTICS_PUBLIC_MEASUREMENT_ID: process.env.ANALYTICS_PUBLIC_MEASUREMENT_ID ?? "" },
   async redirects() {
     return [
       { source: "/about", destination: "/#sobre", permanent: true },

@@ -43,6 +43,7 @@ Não há scripts de lint, testes nem Storybook no `package.json`.
 - Variáveis **opcionais** (não há nenhuma obrigatória; o `.env.example` ainda não lista estas duas):
   - `PRISMIC_REPOSITORY`: outro repositório/endpoint (padrão `peterson-site`).
   - `PRISMIC_ACCESS_TOKEN`: token para repositório privado (nunca com prefixo `NEXT_PUBLIC_`).
+  - `ANALYTICS_PUBLIC_MEASUREMENT_ID`: ID do GA4 (`G-...`); sem ela o GA não carrega.
 - Publicar/despublicar no Prismic dispara um Deploy Hook da Vercel (branch `main`). A URL do hook não fica no Git.
 
 ## Estrutura de pastas
@@ -52,7 +53,7 @@ Não há scripts de lint, testes nem Storybook no `package.json`.
   - `_app.js`, `_document.js`, `api/hello.js` (rota de exemplo do template)
 - `components/`: `SiteChrome.js` (header/footer) e `Seo.js` são os usados pelas páginas atuais.
   As demais pastas (`Badge`, `Banners`, `Buttons`, `Cards`, `Carousels`, `CmsContent`, `Forms`, `Layouts`, `Lists`, `Socials`) são de uma versão antiga, usam `styled-components` (não instalado) e têm `stories.js` do Storybook.
-  `GoogleAnalytics/GoogleAnalytics.jsx` também é legado e não é importado por nenhuma página: **o site atual não tem Google Analytics ativo**.
+  `GoogleAnalytics/index.jsx` carrega o GA4 em `_app.js` quando `ANALYTICS_PUBLIC_MEASUREMENT_ID` está definida (exposta ao navegador via `env` do `next.config.js`). Cliques são rastreados por `lib/analytics.js` em elementos com `data-ga-event` (+ `data-ga-*` como parâmetros); veja a seção Google Analytics do README.
 - `services/`: `blog.js` (lê o snapshot) é o único em uso. `client.js`, `about.js`, `profile.js` e `project.js` são legados e usam `prismic-javascript` (não instalado): não os importe sem reinstalar/migrar.
 - `scripts/sync-posts.cjs`: download do Prismic → `.generated/posts.json`.
 - `data/`: `about.js` (conteúdo de `/sobre`, em uso). `articles.js` é legado (posts antigos em código) e não é importado; os posts vêm só do Prismic.

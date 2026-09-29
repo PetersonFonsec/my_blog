@@ -5,9 +5,9 @@ export function SiteHeader() {
     <header className="site-header">
       <Link className="brand" href="/">peterson<span>_</span></Link>
       <nav aria-label="Navegação principal">
-        <Link href="/sobre">Sobre</Link>
-        <Link href="/posts">Publicações</Link>
-        <Link href="/#contato">Contato</Link>
+        <Link href="/sobre" data-ga-event="cta_click" data-ga-label="Sobre" data-ga-location="header">Sobre</Link>
+        <Link href="/posts" data-ga-event="cta_click" data-ga-label="Publicações" data-ga-location="header">Publicações</Link>
+        <Link href="/#contato" data-ga-event="cta_click" data-ga-label="Contato" data-ga-location="header">Contato</Link>
       </nav>
     </header>
   );
