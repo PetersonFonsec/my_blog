@@ -27,6 +27,27 @@ npm run build
 npm start
 ```
 
+## Integração contínua
+
+Todo pull request para `main` roda o workflow `.github/workflows/ci.yml`:
+
+- **Lint:** `npm run lint` (ESLint com `eslint-config-next`, sem warnings).
+- **Build e smoke test:** `npm run build` e `npm run test:smoke`, que sobe o
+  `next start` e confere o status de `/`, `/sobre`, `/posts`, de cada post do
+  snapshot, das páginas 404 e dos redirects.
+
+O build do CI consulta o Prismic como a Vercel faz, então um conteúdo publicado
+com erro (título ausente, slug duplicado) também falha o PR. Para repositórios
+privados, cadastre o secret `PRISMIC_ACCESS_TOKEN` (e, se necessário, a variável
+`PRISMIC_REPOSITORY`) em Settings → Secrets and variables → Actions.
+
+Para rodar localmente:
+
+```bash
+npm run lint
+npm run build && npm run test:smoke
+```
+
 ## Posts do Prismic no build
 
 Todo `next build` (incluindo `npm run build` no deploy) consulta o Prismic,
@@ -41,6 +62,11 @@ apenas os resumos já presentes na página; o conteúdo completo dos outros post
 não é enviado na listagem. O prefetch dos links de artigos está desativado.
 O Next.js ainda carrega seus arquivos estáticos e dados de navegação quando
 necessário; imagens e embeds presentes nos posts podem fazer requisições próprias.
+
+O mesmo passo gera `public/sitemap.xml` e `public/llms.txt` com as páginas fixas
+e todos os posts do snapshot (`scripts/generate-seo-files.cjs`). Os dois arquivos
+também são regenerados em cada build e não são versionados; `public/robots.txt`
+aponta para o sitemap.
 
 O conteúdo usa os campos existentes `title`, `content`, `references` e as tags.
 O slug editorial (`slugs[0]`) é preferido ao UID, mantendo URLs legíveis.

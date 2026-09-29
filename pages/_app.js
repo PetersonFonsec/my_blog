@@ -9,6 +9,11 @@ export default function App({ Component, pageProps }) {
     return () => document.removeEventListener("click", handleTrackedClick);
   }, []);
 
+  useEffect(() => {
+    if (process.env.NODE_ENV !== "production" || !("serviceWorker" in navigator)) return;
+    navigator.serviceWorker.register("/sw.js").catch(() => {});
+  }, []);
+
   return (
     <>
       <GoogleAnalytics />

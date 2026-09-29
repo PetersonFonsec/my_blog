@@ -1,24 +1,51 @@
 {
+  "id": "/",
   "name": "Peterson Simião — Laboratório pessoal",
   "short_name": "Peterson",
   "description": "Software, estudos e projetos pessoais de Peterson Simião.",
+  "lang": "pt-BR",
+  "dir": "ltr",
   "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
   "orientation": "portrait",
+  "categories": ["education", "technology"],
   "icons": [
     {
-      "src": "/favicon/android-chrome-192x192.png?v=pixel-2",
+      "src": "/favicon/android-chrome-192x192.png?v=pixel-3",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/favicon/android-chrome-512x512.png?v=pixel-2",
+      "src": "/favicon/android-chrome-384x384.png?v=pixel-3",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon/android-chrome-512x512.png?v=pixel-3",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "/favicon/maskable-192x192.png?v=pixel-3",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon/maskable-512x512.png?v=pixel-3",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
+  "shortcuts": [
+    { "name": "Estudos e projetos", "url": "/posts" },
+    { "name": "Sobre mim", "url": "/sobre" }
+  ],
   "theme_color": "#0d181e",
-  "background_color": "#0d181e",
-  "display": "standalone"
+  "background_color": "#0d181e"
 }
