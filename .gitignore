@@ -37,3 +37,7 @@ yarn-error.log*
 
 # Prismic snapshot refreshed on each build
 /.generated/
+
+# SEO files generated from the Prismic snapshot on each build
+/public/sitemap.xml
+/public/llms.txt

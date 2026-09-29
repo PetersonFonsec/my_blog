@@ -1,6 +1,7 @@
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const prismic = require('@prismicio/client');
+const { generateSeoFiles } = require('./generate-seo-files.cjs');
 
 const snapshotPath = path.join(__dirname, '..', '.generated', 'posts.json');
 const slugOf = (document) => document.slugs?.[0] || document.uid || document.id;
@@ -36,12 +37,14 @@ async function syncPosts() {
       html: prismic.asHTML(content, {
         linkResolver: (linked) => linked.type === 'posts' ? `/posts/${slugOf(linked)}` : null,
       }),
+      updatedAt: document.last_publication_date || null,
       reference: /^https?:\/\//i.test(data.references?.url || '') ? data.references.url : null,
     };
   });
   await fs.mkdir(path.dirname(snapshotPath), { recursive: true });
   await fs.writeFile(`${snapshotPath}.tmp`, JSON.stringify(posts));
   await fs.rename(`${snapshotPath}.tmp`, snapshotPath);
+  await generateSeoFiles(posts);
   console.log(`[Prismic] ${posts.length} post(s) baixado(s) para geração estática.`);
 }
 

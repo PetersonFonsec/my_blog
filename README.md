@@ -42,6 +42,11 @@ não é enviado na listagem. O prefetch dos links de artigos está desativado.
 O Next.js ainda carrega seus arquivos estáticos e dados de navegação quando
 necessário; imagens e embeds presentes nos posts podem fazer requisições próprias.
 
+O mesmo passo gera `public/sitemap.xml` e `public/llms.txt` com as páginas fixas
+e todos os posts do snapshot (`scripts/generate-seo-files.cjs`). Os dois arquivos
+também são regenerados em cada build e não são versionados; `public/robots.txt`
+aponta para o sitemap.
+
 O conteúdo usa os campos existentes `title`, `content`, `references` e as tags.
 O slug editorial (`slugs[0]`) é preferido ao UID, mantendo URLs legíveis.
 Tags `Projeto`/`Projetos` classificam projetos; os demais posts são estudos.
