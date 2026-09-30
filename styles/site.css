@@ -19,3 +19,17 @@
 .cms-content img, .cms-content iframe { max-width: 100%; }
 .cms-content img { height: auto; }
 .cms-content pre { overflow-x: auto; }
+
+/* Discrete sprite changes; only the complete overlay fades on exit. */
+.preloader{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;min-height:100dvh;padding:24px;background:var(--bg);opacity:1;transition:opacity 250ms ease}
+.preloader--exiting{opacity:0}
+.preloader__mascot{width:192px;height:320px;flex:none}
+.preloader__stage{position:relative;width:192px;height:320px;transform-origin:top left}
+.preloader__sprite{position:absolute;background-size:1224px 1285px;background-repeat:no-repeat;image-rendering:pixelated}
+.preloader__label{margin:20px 0 0;color:var(--ink);font:24px var(--pixel);text-align:center}
+.preloader__dots{display:inline-block;width:3ch;overflow:hidden;vertical-align:bottom;animation:preloader-dots 1500ms steps(1,end) infinite;text-align:left}
+.preloader__accessible{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+@keyframes preloader-dots{0%{clip-path:inset(0 2ch 0 0)}33.333%{clip-path:inset(0 1ch 0 0)}66.666%{clip-path:inset(0)}}
+@media(max-width:480px){.preloader__label{font-size:20px;margin-top:16px}}
+@media(max-height:480px){.preloader__mascot{width:96px;height:160px}.preloader__stage{transform:scale(.5)}}
+@media(prefers-reduced-motion:reduce){.preloader__dots{animation:none}}
