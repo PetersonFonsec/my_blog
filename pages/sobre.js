@@ -16,11 +16,11 @@ export default function Sobre() {
           <div className="tags"><span>Frontend</span><span>Backend</span><span>Arquitetura</span></div>
           <div className="actions">
             {about.resumeUrl ? (
-              <a className="button primary" href={about.resumeUrl} download="Curriculo-Peterson-Simiao.pdf">Baixar meu currículo ↓</a>
+              <a className="button primary" href={about.resumeUrl} download="Curriculo-Peterson-Simiao.pdf" data-ga-event="cta_click" data-ga-label="Baixar currículo" data-ga-location="sobre">Baixar meu currículo ↓</a>
             ) : (
               <button className="button primary" type="button" disabled aria-describedby="resume-status">Baixar meu currículo ↓</button>
             )}
-            <Link className="button" href="/#contato">Vamos conversar ↗</Link>
+            <Link className="button" href="/#contato" data-ga-event="cta_click" data-ga-label="Vamos conversar" data-ga-location="sobre">Vamos conversar ↗</Link>
           </div>
           {!about.resumeUrl && <p className="resume-status" id="resume-status">Currículo em breve disponível para download.</p>}
         </section>
@@ -36,7 +36,7 @@ export default function Sobre() {
                 {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               </section>
             ))}
-            <Link className="next-article" href="/posts"><small>DIÁRIO DE ESTUDOS</small><strong>Acompanhe o que estou construindo ↗</strong></Link>
+            <Link className="next-article" href="/posts" data-ga-event="cta_click" data-ga-label="Acompanhe o que estou construindo" data-ga-location="sobre"><small>DIÁRIO DE ESTUDOS</small><strong>Acompanhe o que estou construindo ↗</strong></Link>
             <Link className="back-link" href="/">← Voltar ao início</Link>
           </article>
         </div>

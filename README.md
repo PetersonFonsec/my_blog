@@ -27,6 +27,27 @@ npm run build
 npm start
 ```
 
+## Integração contínua
+
+Todo pull request para `main` roda o workflow `.github/workflows/ci.yml`:
+
+- **Lint:** `npm run lint` (ESLint com `eslint-config-next`, sem warnings).
+- **Build e smoke test:** `npm run build` e `npm run test:smoke`, que sobe o
+  `next start` e confere o status de `/`, `/sobre`, `/posts`, de cada post do
+  snapshot, das páginas 404 e dos redirects.
+
+O build do CI consulta o Prismic como a Vercel faz, então um conteúdo publicado
+com erro (título ausente, slug duplicado) também falha o PR. Para repositórios
+privados, cadastre o secret `PRISMIC_ACCESS_TOKEN` (e, se necessário, a variável
+`PRISMIC_REPOSITORY`) em Settings → Secrets and variables → Actions.
+
+Para rodar localmente:
+
+```bash
+npm run lint
+npm run build && npm run test:smoke
+```
+
 ## Posts do Prismic no build
 
 Todo `next build` (incluindo `npm run build` no deploy) consulta o Prismic,
@@ -41,6 +62,11 @@ apenas os resumos já presentes na página; o conteúdo completo dos outros post
 não é enviado na listagem. O prefetch dos links de artigos está desativado.
 O Next.js ainda carrega seus arquivos estáticos e dados de navegação quando
 necessário; imagens e embeds presentes nos posts podem fazer requisições próprias.
+
+O mesmo passo gera `public/sitemap.xml` e `public/llms.txt` com as páginas fixas
+e todos os posts do snapshot (`scripts/generate-seo-files.cjs`). Os dois arquivos
+também são regenerados em cada build e não são versionados; `public/robots.txt`
+aponta para o sitemap.
 
 O conteúdo usa os campos existentes `title`, `content`, `references` e as tags.
 O slug editorial (`slugs[0]`) é preferido ao UID, mantendo URLs legíveis.
@@ -68,3 +94,24 @@ Em desenvolvimento, o snapshot é atualizado ao iniciar `npm run dev`; reinicie
 o processo para buscar alterações do CMS.
 
 Cada push para a branch `main` gera uma nova publicação na Vercel configurada para este repositório.
+
+## Google Analytics
+
+Defina `ANALYTICS_PUBLIC_MEASUREMENT_ID` (ex.: `G-XXXXXXXXXX`) nas variáveis de
+ambiente da Vercel. Sem ela, o script do GA não é carregado (ex.: localmente).
+
+Page views, inclusive navegações no cliente, vêm da medição otimizada do GA4
+(opção "Mudanças de página com base em eventos do histórico do navegador",
+ativa por padrão). Cliques são enviados por um listener único em `_app.js`
+para qualquer elemento com `data-ga-event`; os demais atributos `data-ga-*`
+viram parâmetros do evento (`data-ga-content-id` → `content_id`).
+
+Eventos:
+
+- `select_content` — clique em um post (`content_type=post`, `content_id` = slug, `label`, `location`).
+- `cta_click` — botões de CTA e links do menu (`label`, `location`, `link_url`).
+- `filter_posts` — filtros da listagem de publicações (`label`).
+
+Para ver os parâmetros nos relatórios, registre `label`, `location` e
+`content_id` como dimensões personalizadas (escopo de evento) no GA4 e marque
+`select_content` e `cta_click` como eventos-chave.
