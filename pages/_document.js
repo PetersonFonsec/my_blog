@@ -13,6 +13,8 @@ export default function Document() {
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=pixel-2" />
         <link rel="manifest" href="/favicon/site.webmanifest?v=pixel-2" />
         <meta name="theme-color" content="#0d181e" />
+        {/* Hide the preloader before first paint when it already played in this tab. */}
+        <script dangerouslySetInnerHTML={{ __html: `try{sessionStorage.getItem("mascot-preloader-seen")&&document.documentElement.classList.add("preloader-seen")}catch(e){}` }} />
       </Head>
       <body><Main /><NextScript /></body>
     </Html>
