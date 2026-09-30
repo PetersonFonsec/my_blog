@@ -17,6 +17,8 @@ export default function Document() {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-title" content="Peterson" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        {/* Hide the preloader before first paint when it already played in this tab. */}
+        <script dangerouslySetInnerHTML={{ __html: `try{sessionStorage.getItem("mascot-preloader-seen")&&document.documentElement.classList.add("preloader-seen")}catch(e){}` }} />
       </Head>
       <body><Main /><NextScript /></body>
     </Html>

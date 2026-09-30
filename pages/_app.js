@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import GoogleAnalytics from "../components/GoogleAnalytics";
 import { handleTrackedClick } from "../lib/analytics";
 import "../styles/site.css";
+import Preloader from "../components/Preloader";
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GoogleAnalytics />
+      <Preloader />
       <Component {...pageProps} />
     </>
   );

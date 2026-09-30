@@ -19,3 +19,36 @@
 .cms-content img, .cms-content iframe { max-width: 100%; }
 .cms-content img { height: auto; }
 .cms-content pre { overflow-x: auto; }
+
+/* Preloader: 3s mascot scene — walks in, waves at the visitor, jumps when loading completes. */
+.preloader{position:fixed;inset:0;z-index:1000;display:grid;place-content:center;justify-items:center;gap:22px;background:radial-gradient(circle at 50% 45%,#16303a,var(--bg) 70%);cursor:pointer;animation:preloader-out .45s ease 2.75s forwards}
+.preloader.is-skipped{animation:none;opacity:0;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
+.preloader-seen .preloader{display:none}
+.preloader-stage{position:relative;width:300px;height:230px}
+.preloader-walker{position:absolute;left:calc(50% - 75px);bottom:18px;width:150px;height:200px;animation:preloader-walk 2.75s linear forwards}
+.preloader-hero{width:100%;height:100%;background:url("/sprites.png") 33.333% 0/400% 100% no-repeat;image-rendering:pixelated;transform-origin:50% 100%;animation:preloader-hero 2.75s linear forwards}
+.preloader-floor{position:absolute;left:0;right:0;bottom:0;height:18px;background:#9db56d;border-top:4px solid var(--lime);box-shadow:0 8px #334950}
+.preloader-bubble{position:absolute;z-index:1;bottom:100%;left:45%;padding:6px 10px;white-space:nowrap;background:var(--ink);color:#14210d;font:500 16px var(--pixel);box-shadow:3px 3px #071016;opacity:0;transform:scale(.4);transform-origin:0 100%}
+.preloader-bubble:after{content:"";position:absolute;left:10px;top:100%;border:6px solid transparent;border-top-color:var(--ink);border-left-color:var(--ink)}
+.preloader-bubble-hi{animation:preloader-bubble 2.75s steps(1,end) forwards}
+.preloader-bubble-go{left:88%;bottom:62%;animation:preloader-bubble-go 2.75s steps(1,end) forwards}
+.preloader-bar{width:220px;height:14px;padding:2px;border:2px solid var(--line);background:#0a141a}
+.preloader-bar i{display:block;height:100%;width:0;background:repeating-linear-gradient(90deg,var(--lime) 0 10px,#a6d64b 10px 12px);animation:preloader-bar 2.2s steps(11,end) forwards}
+.preloader-hint{color:var(--muted);font:11px monospace;letter-spacing:1px;text-transform:uppercase;opacity:.7}
+@keyframes preloader-walk{0%{transform:translateX(-230px)}36%{transform:translateX(0)}100%{transform:translateX(0)}}
+@keyframes preloader-hero{
+  0%,9%,18%,27%{background-position:33.333% 0;transform:translateY(0)}
+  4.5%,13.5%,22.5%,31.5%{background-position:33.333% 0;transform:translateY(-6px)}
+  36%{background-position:33.333% 0;transform:translateY(0)}
+  36.1%,40%,48%,56%,64%{background-position:0 0;transform:rotate(0)}
+  44%,52%,60%{background-position:0 0;transform:rotate(-3deg)}
+  66%{background-position:66.667% 0;transform:translateY(0)}
+  74%{background-position:66.667% 0;transform:translateY(-46px)}
+  82%{background-position:66.667% 0;transform:translateY(0)}
+  82.1%,100%{background-position:0 0;transform:translateY(0)}
+}
+@keyframes preloader-bubble{0%{opacity:0;transform:scale(.4)}36%{opacity:1;transform:scale(1)}64%{opacity:0;transform:scale(.4)}}
+@keyframes preloader-bubble-go{0%{opacity:0;transform:scale(.4)}66%{opacity:1;transform:scale(1)}90%{opacity:0;transform:scale(.4)}}
+@keyframes preloader-bar{to{width:100%}}
+@keyframes preloader-out{to{opacity:0;visibility:hidden}}
+@media(prefers-reduced-motion:reduce){.preloader{animation-delay:1s}.preloader-walker,.preloader-hero,.preloader-bar i{animation:none}.preloader-hero{background-position:0 0}.preloader-bar i{width:100%}.preloader-bubble-hi{animation:none;opacity:1;transform:none}.preloader-bubble-go{display:none}}
