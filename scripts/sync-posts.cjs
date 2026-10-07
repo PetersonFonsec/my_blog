@@ -6,13 +6,13 @@ const { generateSeoFiles } = require('./generate-seo-files.cjs');
 const snapshotPath = path.join(__dirname, '..', '.generated', 'posts.json');
 const slugOf = (document) => document.slugs?.[0] || document.uid || document.id;
 
-// Texto em Markdown colado no Prismic chega como parágrafos com "#", "- " ou "1. "
+// Texto em Markdown colado no Prismic chega como parágrafos com "#", "- ", "1. " ou "1 - "
 // literais. Converte esses parágrafos nos blocos equivalentes do Rich Text e
 // descarta parágrafos vazios (sobras de linhas em branco no texto colado).
 const markdownBlocks = [
   [/^(#{1,6})\s+/, (match) => `heading${Math.max(2, match[1].length)}`],
   [/^[-*]\s+/, () => 'list-item'],
-  [/^\d{1,2}[.)]\s+/, () => 'o-list-item'],
+  [/^\d{1,2}(?:[.)]|\s+-)\s+/, () => 'o-list-item'],
 ];
 
 function normalizeContent(content) {
