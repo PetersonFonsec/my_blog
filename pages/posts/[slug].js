@@ -16,7 +16,15 @@ export default function ArticlePage({ article, nextArticle }) {
           <div><span>{article.readingTime}</span><span>LABORATÓRIO PESSOAL</span></div>
         </header>
         <div className="article-layout">
-          <aside><strong>PUBLICAÇÃO</strong><Link prefetch={false} href="/posts">← Todas as publicações</Link></aside>
+          <aside>
+            {article.toc?.length > 0 && (
+              <nav className="article-toc" aria-label="Sumário">
+                <strong>NESTE POST</strong>
+                <ol>{article.toc.map(({ id, text, level }) => <li key={id} className={level === 3 ? "toc-sub" : undefined}><a href={`#${id}`}>{text}</a></li>)}</ol>
+              </nav>
+            )}
+            <strong>PUBLICAÇÃO</strong><Link prefetch={false} href="/posts">← Todas as publicações</Link>
+          </aside>
           <article>
             <div className="cms-content" dangerouslySetInnerHTML={{ __html: article.html }} />
             {article.reference && <p><a href={article.reference} target="_blank" rel="noreferrer">Referência ↗</a></p>}

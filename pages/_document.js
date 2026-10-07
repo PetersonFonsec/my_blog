@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Pixelify+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
         <link rel="icon" href="/favicon/favicon.ico?v=pixel-3" sizes="any" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=pixel-3" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=pixel-3" />

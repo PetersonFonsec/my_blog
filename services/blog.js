@@ -6,6 +6,6 @@ export async function getBlog() {
   return JSON.parse(await readFile(path.join(process.cwd(), ".generated", "posts.json"), "utf8"));
 }
 
-export function articleSummary({ html, reference, ...summary }) {
+export function articleSummary({ html, reference, toc, ...summary }) {
   return summary;
 }
