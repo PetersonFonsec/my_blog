@@ -82,8 +82,8 @@ async function syncPosts() {
     const text = prismic.asText(content);
     const title = prismic.asText(data.title || []);
     if (!title) throw new Error(`Post sem título: ${document.id}`);
-    const type = tags.some((tag) => /^projetos?$/i.test(tag)) ? 'projeto'
-      : tags.some((tag) => /^(estudos?|leituras?)$/i.test(tag)) ? 'estudo' : 'post';
+    const type = tags.some((tag) => /^projetos?(\s|$)/i.test(tag)) ? 'projeto'
+      : tags.some((tag) => /^(estudos?|leituras?)(\s|$)/i.test(tag)) ? 'estudo' : 'post';
     return {
       slug, title, type,
       category: tags.join(' / ') || ({ projeto: 'Projeto', estudo: 'Estudo', post: 'Post' })[type],
