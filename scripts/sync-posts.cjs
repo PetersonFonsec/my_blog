@@ -82,10 +82,11 @@ async function syncPosts() {
     const text = prismic.asText(content);
     const title = prismic.asText(data.title || []);
     if (!title) throw new Error(`Post sem título: ${document.id}`);
-    const type = tags.some((tag) => /^projetos?$/i.test(tag)) ? 'projeto' : 'estudo';
+    const type = tags.some((tag) => /^projetos?$/i.test(tag)) ? 'projeto'
+      : tags.some((tag) => /^(estudos?|leituras?)$/i.test(tag)) ? 'estudo' : 'post';
     return {
       slug, title, type,
-      category: tags.join(' / ') || (type === 'projeto' ? 'Projeto' : 'Estudo'),
+      category: tags.join(' / ') || ({ projeto: 'Projeto', estudo: 'Estudo', post: 'Post' })[type],
       excerpt: text.length > 180 ? `${text.slice(0, 177)}…` : text,
       readingTime: `${Math.max(1, Math.ceil(text.split(/\s+/).filter(Boolean).length / 200))} min de leitura`,
       html: prismic.asHTML(content, {
