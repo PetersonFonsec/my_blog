@@ -37,7 +37,7 @@ Não há scripts de lint, testes nem Storybook no `package.json`.
 - `services/blog.js` (`getBlog`) lê esse snapshot; é usado só em `getStaticPaths`/`getStaticProps` de `pages/posts/`.
 - Sem ISR, sem fallback e sem consulta ao Prismic no navegador: slug ausente no build → 404.
 - Erro de API, post sem título ou slug inválido/duplicado **interrompem o build** (de propósito).
-- Slug = `slugs[0]` → `uid` → `id`. Tags `Projeto`/`Projetos` → tipo `projeto`; o resto → `estudo`.
+- Slug = `slugs[0]` → `uid` → `id`. Tags que começam com a palavra `Projeto`/`Projetos` (ex.: `Projeto Pessoal`) → tipo `projeto`; com `Estudo(s)`/`Leitura(s)` → `estudo`; o resto → `post`.
 - Cada post do snapshot tem `slug`, `title`, `type`, `category`, `excerpt` (até 180 caracteres), `readingTime` (200 palavras/min), `html` e `reference` (só URLs `http(s)`). `articleSummary()` remove `html` e `reference` para a listagem em `/posts`.
 - Em dev, o snapshot só é atualizado ao iniciar `npm run dev`; reinicie para ver mudanças do CMS.
 - Variáveis **opcionais** (não há nenhuma obrigatória; o `.env.example` ainda não lista estas duas):

@@ -70,7 +70,7 @@ aponta para o sitemap.
 
 O conteúdo usa os campos existentes `title`, `content`, `references` e as tags.
 O slug editorial (`slugs[0]`) é preferido ao UID, mantendo URLs legíveis.
-Tags `Projeto`/`Projetos` classificam projetos; os demais posts são estudos.
+Tags que começam com a palavra `Projeto`/`Projetos` (ex.: `Projeto Pessoal`) classificam projetos e as que começam com `Estudo(s)`/`Leitura(s)` classificam estudos e leituras; os demais são posts. As tags não diferenciam maiúsculas/minúsculas.
 Erros de API, títulos ausentes ou slugs duplicados interrompem o build.
 Não há fallback silencioso para os artigos de exemplo.
 

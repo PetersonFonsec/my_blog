@@ -72,3 +72,4 @@
 .cms-content a[target="_blank"]:after{content:"↗";margin-left:.15em;font:.8em var(--pixel)}
 @media(prefers-reduced-motion:reduce){.cms-content a{transition:none}}
 @media(max-width:820px){.cms-content{font-size:17px}}
+.post-card{--accent:var(--lime);border-top-color:var(--accent)}.post-card--estudo{--accent:#6fd3ff}.post-card--projeto{--accent:#ffb454}.post-card:hover{border-color:var(--accent)}.post-card>strong{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 55%,#0d1920)}.post-type{display:inline-block;margin-right:10px;padding:2px 7px;background:var(--accent);color:#0d171f;font-weight:700;letter-spacing:1px}
