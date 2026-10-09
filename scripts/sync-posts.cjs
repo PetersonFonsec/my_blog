@@ -15,8 +15,49 @@ const markdownBlocks = [
   [/^\d{1,2}(?:[.)]|\s+-)\s+/, () => 'o-list-item'],
 ];
 
+const siteOrigin = /^https?:\/\/(?:www\.)?petersonsimiao\.com\.br(?=\/|$)/i;
+const markdownLink = /\[([^\]\n]+)\]\(((?:https?:\/\/|\/)[^\s)]+)\)/g;
+
+// Converte "[texto](url)" literal em um span de link do Rich Text, reposicionando
+// os spans existentes (negrito, itálico...) para o texto sem a sintaxe Markdown.
+// Links para o próprio site viram caminhos relativos; os externos abrem em nova aba.
+function inlineLinks(block) {
+  const text = block.text || '';
+  if (block.type === 'preformatted' || !text.includes('](')) return block;
+  const positions = [];
+  const links = [];
+  let output = '';
+  let last = 0;
+  const copy = (from, to) => {
+    for (let i = from; i < to; i++) positions[i] = output.length + i - from;
+    output += text.slice(from, to);
+  };
+  for (const match of text.matchAll(markdownLink)) {
+    const [whole, label, url] = match;
+    copy(last, match.index);
+    positions[match.index] = output.length;
+    const start = output.length;
+    copy(match.index + 1, match.index + 1 + label.length);
+    for (let i = match.index + 1 + label.length; i < match.index + whole.length; i++) positions[i] = output.length;
+    const local = url.replace(siteOrigin, '') || '/';
+    const external = !local.startsWith('/');
+    links.push({
+      start, end: output.length, type: 'hyperlink',
+      data: { link_type: 'Web', url: local, ...(external && { target: '_blank' }) },
+    });
+    last = match.index + whole.length;
+  }
+  if (!links.length) return block;
+  copy(last, text.length);
+  positions[text.length] = output.length;
+  const spans = (block.spans || [])
+    .map((span) => ({ ...span, start: positions[span.start], end: positions[span.end] }))
+    .filter((span) => span.end > span.start);
+  return { ...block, text: output, spans: [...spans, ...links] };
+}
+
 function normalizeContent(content) {
-  return content.flatMap((block) => {
+  return content.map(inlineLinks).flatMap((block) => {
     if (block.type !== 'paragraph') {
       // O título do post já é o <h1> da página.
       return [block.type === 'heading1' ? { ...block, type: 'heading2' } : block];
