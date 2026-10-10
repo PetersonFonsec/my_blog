@@ -100,8 +100,29 @@ function tableOfContents(content) {
   return { toc, ids };
 }
 
-async function syncPosts() {
-  const client = prismic.createClient(process.env.PRISMIC_REPOSITORY || 'peterson-site', {
+const classify = (tags) => (tags.some((tag) => /^projetos?(\s|$)/i.test(tag)) ? 'projeto'
+  : tags.some((tag) => /^(estudos?|leituras?)(\s|$)/i.test(tag)) ? 'estudo' : 'post');
+
+function summarize({ slug, title, tags, text, html, toc, publishedAt, updatedAt, reference }) {
+  const type = classify(tags);
+  return {
+    slug, title, type,
+    category: tags.join(' / ') || ({ projeto: 'Projeto', estudo: 'Estudo', post: 'Post' })[type],
+    excerpt: text.length > 180 ? `${text.slice(0, 177)}…` : text,
+    readingTime: `${Math.max(1, Math.ceil(text.split(/\s+/).filter(Boolean).length / 200))} min de leitura`,
+    html,
+    toc,
+    publishedAt: publishedAt || null,
+    updatedAt: updatedAt || null,
+    reference: /^https?:\/\//i.test(reference || '') ? reference : null,
+  };
+}
+
+// PRISMIC_REPOSITORY=none desliga o Prismic (quando todos os posts já estiverem em Markdown).
+async function prismicPosts() {
+  const repository = process.env.PRISMIC_REPOSITORY || 'peterson-site';
+  if (repository === 'none') return [];
+  const client = prismic.createClient(repository, {
     accessToken: process.env.PRISMIC_ACCESS_TOKEN,
     fetch: (url, options) => fetch(url, { ...options, signal: AbortSignal.timeout(30000) }),
   });
@@ -110,26 +131,17 @@ async function syncPosts() {
     lang: '*',
     orderings: [{ field: 'document.first_publication_date', direction: 'desc' }],
   });
-  const slugs = new Set();
-  const posts = documents.map((document) => {
+  return documents.map((document) => {
     const slug = slugOf(document);
-    if (!slug || /[/?#]/.test(slug) || slugs.has(slug)) {
-      throw new Error(`Slug inválido ou duplicado no Prismic: ${slug}`);
-    }
-    slugs.add(slug);
+    if (!slug || /[/?#]/.test(slug)) throw new Error(`Slug inválido no Prismic: ${slug}`);
     const { data, tags = [] } = document;
     const content = normalizeContent(data.content || []);
     const { toc, ids } = tableOfContents(content);
-    const text = prismic.asText(content);
     const title = prismic.asText(data.title || []);
     if (!title) throw new Error(`Post sem título: ${document.id}`);
-    const type = tags.some((tag) => /^projetos?(\s|$)/i.test(tag)) ? 'projeto'
-      : tags.some((tag) => /^(estudos?|leituras?)(\s|$)/i.test(tag)) ? 'estudo' : 'post';
-    return {
-      slug, title, type,
-      category: tags.join(' / ') || ({ projeto: 'Projeto', estudo: 'Estudo', post: 'Post' })[type],
-      excerpt: text.length > 180 ? `${text.slice(0, 177)}…` : text,
-      readingTime: `${Math.max(1, Math.ceil(text.split(/\s+/).filter(Boolean).length / 200))} min de leitura`,
+    return summarize({
+      slug, title, tags, toc,
+      text: prismic.asText(content),
       html: prismic.asHTML(content, {
         linkResolver: (linked) => linked.type === 'posts' ? `/posts/${slugOf(linked)}` : null,
         serializer: {
@@ -137,16 +149,53 @@ async function syncPosts() {
           heading3: ({ node, children }) => ids.has(node) ? `<h3 id="${ids.get(node)}">${children}</h3>` : `<h3>${children}</h3>`,
         },
       }),
-      toc,
-      updatedAt: document.last_publication_date || null,
-      reference: /^https?:\/\//i.test(data.references?.url || '') ? data.references.url : null,
-    };
+      publishedAt: document.first_publication_date,
+      updatedAt: document.last_publication_date,
+      reference: data.references?.url,
+    });
   });
+}
+
+// Posts do CMS próprio: content/posts/<slug>.md, publicados pelo editor em /admin.
+async function markdownPosts() {
+  const { postsDir, parsePostFile, validatePost, renderMarkdown } = await import('../lib/markdown-posts.mjs');
+  const dir = path.join(__dirname, '..', postsDir);
+  const files = (await fs.readdir(dir).catch(() => [])).filter((file) => file.endsWith('.md')).sort();
+  const posts = [];
+  for (const file of files) {
+    const slug = file.slice(0, -3);
+    const post = parsePostFile(await fs.readFile(path.join(dir, file), 'utf8'));
+    validatePost(slug, post);
+    if (post.draft) continue;
+    const { html, toc, text } = renderMarkdown(post.body);
+    posts.push(summarize({
+      slug, html, toc, text,
+      title: post.title.trim(),
+      tags: post.tags,
+      publishedAt: new Date(post.date).toISOString(),
+      updatedAt: new Date(post.updatedAt || post.date).toISOString(),
+      reference: post.reference,
+    }));
+  }
+  return posts;
+}
+
+async function syncPosts() {
+  const [fromPrismic, fromMarkdown] = await Promise.all([prismicPosts(), markdownPosts()]);
+  // O Markdown substitui o post do Prismic com o mesmo slug (migração post a post).
+  const local = new Set(fromMarkdown.map(({ slug }) => slug));
+  const slugs = new Set();
+  const posts = [...fromMarkdown, ...fromPrismic.filter(({ slug }) => !local.has(slug))]
+    .sort((a, b) => (b.publishedAt || '').localeCompare(a.publishedAt || ''));
+  for (const { slug } of posts) {
+    if (slugs.has(slug)) throw new Error(`Slug duplicado: ${slug}`);
+    slugs.add(slug);
+  }
   await fs.mkdir(path.dirname(snapshotPath), { recursive: true });
   await fs.writeFile(`${snapshotPath}.tmp`, JSON.stringify(posts));
   await fs.rename(`${snapshotPath}.tmp`, snapshotPath);
   await generateSeoFiles(posts);
-  console.log(`[Prismic] ${posts.length} post(s) baixado(s) para geração estática.`);
+  console.log(`[Posts] ${fromPrismic.length} do Prismic e ${fromMarkdown.length} em Markdown; ${posts.length} post(s) para geração estática.`);
 }
 
 module.exports = { syncPosts };

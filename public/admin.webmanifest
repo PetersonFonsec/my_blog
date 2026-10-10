@@ -1,0 +1,18 @@
+{
+  "id": "/admin",
+  "name": "Escrever — Peterson Simião",
+  "short_name": "Escrever",
+  "description": "Editor de posts do site.",
+  "lang": "pt-BR",
+  "start_url": "/admin",
+  "scope": "/admin",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/favicon/android-chrome-192x192.png?v=pixel-3", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/favicon/android-chrome-512x512.png?v=pixel-3", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/favicon/maskable-512x512.png?v=pixel-3", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "theme_color": "#0d181e",
+  "background_color": "#0d181e"
+}

@@ -95,6 +95,47 @@ o processo para buscar alterações do CMS.
 
 Cada push para a branch `main` gera uma nova publicação na Vercel configurada para este repositório.
 
+## CMS próprio: posts em Markdown e editor em `/admin`
+
+Além do Prismic, o build lê posts escritos em Markdown em `content/posts/<slug>.md`
+(`scripts/sync-posts.cjs` + `lib/markdown-posts.mjs`). O nome do arquivo é o slug.
+Formato:
+
+```markdown
+---
+title: Meu post
+date: 2026-10-10T12:00:00.000Z
+updated: 2026-10-11T09:00:00.000Z
+tags: Estudo, Next.js
+reference: https://exemplo.com
+draft: false
+---
+
+Texto em Markdown. `# Título` vira `<h2>` (o título do post já é o `<h1>`).
+```
+
+- `draft: true` mantém o arquivo no repositório, mas fora do site.
+- As tags classificam o post do mesmo jeito que no Prismic.
+- Se um post em Markdown tiver o mesmo slug de um post do Prismic, o Markdown vence.
+  Assim dá para migrar post a post. Com todos migrados, defina `PRISMIC_REPOSITORY=none`
+  para o build deixar de consultar o Prismic.
+- Título ausente, data inválida ou slug inválido interrompem o build.
+
+O editor fica em `/admin`. Ele foi feito para o celular e pode ser instalado na tela
+inicial (manifesto `public/admin.webmanifest`). Cada salvamento é um único commit na
+`main` pela API do GitHub, com o post e as fotos juntos, e a Vercel publica em seguida.
+As fotos são reduzidas no navegador (até 1600 px, JPEG) e vão para `public/uploads/AAAA/MM/`.
+O texto em edição fica guardado no aparelho até ser salvo.
+
+Variáveis de ambiente na Vercel (Production), obrigatórias para o editor:
+
+- `CMS_PASSWORD`: senha do editor. Use uma senha longa; trocá-la encerra as sessões abertas.
+- `CMS_GITHUB_TOKEN`: token *fine-grained* do GitHub com acesso só a este repositório
+  e permissão **Contents: Read and write**.
+
+Opcionais: `CMS_GITHUB_REPO` (padrão `PetersonFonsec/my_blog`) e `CMS_GITHUB_BRANCH`
+(padrão `main`). Sem as obrigatórias, `/admin` mostra que o CMS não está configurado.
+
 ## Google Analytics
 
 Defina `ANALYTICS_PUBLIC_MEASUREMENT_ID` (ex.: `G-XXXXXXXXXX`) nas variáveis de
