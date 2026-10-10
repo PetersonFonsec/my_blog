@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import Head from "next/head";
 import GoogleAnalytics from "../components/GoogleAnalytics";
 import { handleTrackedClick } from "../lib/analytics";
 import "../styles/site.css";
@@ -17,6 +18,10 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
+      <Head>
+        {/* Fica aqui (e não no _document) para o /admin trocar pelo manifesto do editor. */}
+        <link rel="manifest" href="/favicon/site.webmanifest?v=pixel-3" key="manifest" />
+      </Head>
       <GoogleAnalytics />
       <Preloader />
       <Component {...pageProps} />

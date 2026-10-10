@@ -46,10 +46,18 @@ Não há scripts de lint, testes nem Storybook no `package.json`.
   - `ANALYTICS_PUBLIC_MEASUREMENT_ID`: ID do GA4 (`G-...`); sem ela o GA não carrega.
 - Publicar/despublicar no Prismic dispara um Deploy Hook da Vercel (branch `main`). A URL do hook não fica no Git.
 
+## CMS próprio (posts em Markdown + editor `/admin`)
+
+- O build também lê `content/posts/<slug>.md` (front matter `title`, `date`, `updated`, `tags`, `reference`, `draft`). Parser e renderização em `lib/markdown-posts.mjs` (usa `marked`); a junção com o Prismic fica em `syncPosts()`.
+- Mesmo slug no Markdown e no Prismic: o Markdown vence (migração post a post). `PRISMIC_REPOSITORY=none` desliga o Prismic.
+- `draft: true` fica fora do site. Título ausente, data inválida ou slug inválido interrompem o build.
+- `/admin` (`pages/admin.js`) + rotas `pages/api/cms/*`: login por `CMS_PASSWORD` (cookie HttpOnly assinado, `lib/cms-auth.mjs`) e gravação via API do GitHub com `CMS_GITHUB_TOKEN` (`lib/cms-github.mjs`), um commit por salvamento direto na `main`. Esses commits de conteúdo são o fluxo esperado do editor; a regra de não commitar na `main` vale para mudanças de código.
+- Fotos: reduzidas no navegador e gravadas em `public/uploads/AAAA/MM/` no mesmo commit do post.
+
 ## Estrutura de pastas
 
 - `pages/`: rotas (Pages Router)
-  - `index.js` (home), `sobre.js` (/sobre), `posts/index.js` (/posts), `posts/[slug].js` (post)
+  - `index.js` (home), `sobre.js` (/sobre), `posts/index.js` (/posts), `posts/[slug].js` (post), `admin.js` (editor)
   - `_app.js`, `_document.js`, `api/hello.js` (rota de exemplo do template)
 - `components/`: `SiteChrome.js` (header/footer) e `Seo.js` são os usados pelas páginas atuais.
   As demais pastas (`Badge`, `Banners`, `Buttons`, `Cards`, `Carousels`, `CmsContent`, `Forms`, `Layouts`, `Lists`, `Socials`) são de uma versão antiga, usam `styled-components` (não instalado) e têm `stories.js` do Storybook.
@@ -69,7 +77,7 @@ Não há scripts de lint, testes nem Storybook no `package.json`.
 ## Validação antes de abrir PR
 
 1. `npm ci`
-2. `npm run build` (precisa de acesso à internet para o Prismic; deve logar `[Prismic] N post(s) baixado(s)...`)
+2. `npm run build` (precisa de acesso à internet para o Prismic; deve logar `[Posts] N do Prismic e M em Markdown...`)
 3. `npm run dev` e conferir `/`, `/posts`, `/sobre` e um `/posts/<slug>`.
 
 <!-- BEGIN:nextjs-agent-rules -->
